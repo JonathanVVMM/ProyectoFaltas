@@ -32,6 +32,19 @@ namespace ProyectoFaltas.Database
         {
             return await Database.InsertAsync(activo);
         }
-        public Task
+        public async Task<List<Activo>> GetActivosAsync()
+        {
+            return await Database.Table<Activo>().ToListAsync();
+        }
+        public async Task<Activo> GetActivoAsync(int id)
+        {
+            return await Database.Table<Activo>().Where(i => i.Id == id).FirstOrDefaultAsync(); //Similar a SQL
+        }
+        public async Task<int> DeleteActivoAsync(Activo activo)
+        {
+            await Init();
+            return await Database.DeleteAsync(activo);
+        }
+
     }
 }
