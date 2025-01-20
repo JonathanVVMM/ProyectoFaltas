@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFaltas.Views.ViewCreateTeachers"
@@ -104,14 +102,7 @@
 
                             <VerticalStackLayout Grid.Row="2">
                                 <Label Text="Tipo" />
-                                <Picker x:Name="picker" SelectedItem="{Binding Tipo}">
-                                    <Picker.ItemsSource>
-                                        <x:Array Type="{x:Type x:String}">
-                                            <x:String>Interino</x:String>
-                                            <x:String>Fijo</x:String>
-                                        </x:Array>
-                                    </Picker.ItemsSource>
-                                </Picker>
+                                <Entry x:Name="eTipoActual" Text="{Binding ProfesorEditando.TipoEditando}"  BackgroundColor="LightGray"/>
                             </VerticalStackLayout>
 
                         </Grid>
@@ -144,7 +135,14 @@
 
                         <VerticalStackLayout Grid.Row="2">
                             <Label Text="Tipo" />
-                            <Entry x:Name="eTipoNuevo" Text="{Binding TipoNuevo, Mode=TwoWay}"/>
+                            <Picker SelectedItem="{Binding Tipo}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Interino</x:String>
+                                        <x:String>Fijo</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
                         </VerticalStackLayout>
 
                         <Grid Grid.Row="3" ColumnDefinitions="2*,*" ColumnSpacing="10">
