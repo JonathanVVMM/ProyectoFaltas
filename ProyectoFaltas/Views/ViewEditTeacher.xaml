@@ -137,7 +137,14 @@
 
                         <VerticalStackLayout Grid.Row="2">
                             <Label Text="Tipo" />
-                            <Entry x:Name="eTipoNuevo" Text="{Binding TipoNuevo, Mode=TwoWay}"/>
+                            <Picker x:Name="picker" SelectedItem="{Binding TipoNuevo, Mode=TwoWay}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Interino</x:String>
+                                        <x:String>Fijo</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
                         </VerticalStackLayout>
 
                         <Grid Grid.Row="3" ColumnDefinitions="2*,*" ColumnSpacing="10">

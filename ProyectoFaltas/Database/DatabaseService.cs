@@ -155,9 +155,9 @@ namespace ProyectoFaltas.Database
         {
             await Init();
             if (profesor.Id != 0)
-                return await Database.InsertAsync(profesor);
-            else
                 return await Database.UpdateAsync(profesor);
+            else
+                return await Database.InsertAsync(profesor);
         }
 
         public async Task<List<Profesor>> GetProfesoresAsync()

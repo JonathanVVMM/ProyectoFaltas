@@ -52,6 +52,8 @@ namespace ProyectoFaltas.ViewModels
             IconoAyudaEditarDatosCommand = new Command(IconoAyudaEditarDatos);
             IconoAyudaListaDatosCommand = new Command(IconoAyudaListaDatos);
 
+            recargarLista();
+
         }
 
         private DatabaseService database = new DatabaseService();
@@ -182,8 +184,12 @@ namespace ProyectoFaltas.ViewModels
         {
             if (Tipo != "" && Apellidos != "" && Nombre != "")
             {
-                //aqui entra
-                await database.SaveProfesorAsync(new Profesor { Nombre = Nombre, Tipo = Tipo, Apellidos = Apellidos });
+                Profesor prof = new Profesor();
+                prof.Apellidos = Apellidos;
+                prof.Nombre = Nombre;
+                prof.Tipo = Tipo;
+
+                await database.SaveProfesorAsync(prof);
                 recargarLista();
             }
         }
@@ -193,13 +199,13 @@ namespace ProyectoFaltas.ViewModels
             if (await App.Current.MainPage.DisplayAlert("Borrar Profesor", "Está seguro de borrar el profesor seleccionado?", "Confirmar", "Cancelar"))
             {
                 Profesor p = await database.GetProfesorAsync(ItemId);
-                if (p.Equals(ProfesorEditando))
-                {
-                    ProfesorEditando = null;
-                    Editando = false;
-                    await database.DeleteProfesorAsync(ListaProfesores.FirstOrDefault(p => p.Id == ItemId));
-                    recargarLista();
-                }
+
+                NombreNuevo = ""; ApellidosNuevo = ""; TipoNuevo = "";
+                ProfesorEditando = null;
+                Editando = false;
+                await database.DeleteProfesorAsync(p);
+                recargarLista();
+
 
 
             }
@@ -237,6 +243,7 @@ namespace ProyectoFaltas.ViewModels
             {
                 ProfesorEditando = null;
                 Editando = false;
+                ApellidosNuevo = ""; NombreNuevo = ""; TipoNuevo = "";
             }
         }
 
