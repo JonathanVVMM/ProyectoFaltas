@@ -5,11 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ProyectoFaltas"
     Shell.FlyoutBehavior="Disabled"
-    Title="ProyectoFaltas">
+    Title="ProyectoFaltas"
+    xmlns:views="clr-namespace:ProyectoFaltas.Views">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+
+        <Tab Title="Creación Profesores">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:ViewCreateTeacher}"
+                Route="ViewCreateTeacher"/>
+
+        </Tab>
+
+        <Tab Title="Editar Profesores">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:ViewEditTeacher}"
+                Route="ViewEditTeacher"/>
+        </Tab>
+
+
+    </TabBar>
 
 </Shell>

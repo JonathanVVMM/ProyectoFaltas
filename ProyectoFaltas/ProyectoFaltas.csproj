@@ -76,7 +76,7 @@
 	  <MauiXaml Update="Views\ViewCreateTeachers.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ViewEditTeachers.xaml">
+	  <MauiXaml Update="Views\ViewEditTeacher.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
