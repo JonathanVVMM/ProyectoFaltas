@@ -80,7 +80,7 @@
 
                         <VerticalStackLayout Grid.Row="2">
                             <Label Text="Tipo" />
-                            <Picker x:Name="picker" SelectedItem="{Binding Tipo}">
+                            <Picker x:Name="picker" SelectedItem="{Binding Tipo, Mode=TwoWay}">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Interino</x:String>

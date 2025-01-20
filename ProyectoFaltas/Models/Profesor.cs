@@ -18,21 +18,12 @@ namespace ProyectoFaltas.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
-        private int _id;
         private string _nombre;
         private string _apellidos;
         private string _tipo;
 
         [PrimaryKey, AutoIncrement]
-        public int Id
-        {
-            get => _id;
-            set
-            {
-                _id = value;
-            }
-        }
+        public int Id { get; set; }
 
         public string Nombre
         {

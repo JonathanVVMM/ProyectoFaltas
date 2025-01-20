@@ -151,10 +151,13 @@ namespace ProyectoFaltas.Database
         }
 
         // -------------------------- TABLA PROFESOR --------------------------
-        public async Task<int> AddProfesorAsync(Profesor profesor)
+        public async Task<int> SaveProfesorAsync(Profesor profesor)
         {
             await Init();
-            return await Database.InsertAsync(profesor);
+            if (profesor.Id != 0)
+                return await Database.InsertAsync(profesor);
+            else
+                return await Database.UpdateAsync(profesor);
         }
 
         public async Task<List<Profesor>> GetProfesoresAsync()
@@ -174,5 +177,6 @@ namespace ProyectoFaltas.Database
             await Init();
             return await Database.DeleteAsync(profesor);
         }
+
     }
 }

@@ -173,17 +173,18 @@ namespace ProyectoFaltas.ViewModels
         public ICommand ActualizarProfesorCommand { get; set; }
         public ICommand CancelarActualizarProfesorCommand { get; set; }
 
-        private void recargarLista()
+        private async void recargarLista()
         {
-
+            ListaProfesores = new ObservableCollection<Profesor>(await database.GetProfesoresAsync());
         }
 
         public async void AddProfesor()
         {
             if (Tipo != "" && Apellidos != "" && Nombre != "")
             {
-                Id++;
-                ListaProfesores.Add(new Profesor { Id = Id, Nombre = Nombre, Tipo = Tipo, Apellidos = Apellidos });
+                //aqui entra
+                await database.SaveProfesorAsync(new Profesor { Nombre = Nombre, Tipo = Tipo, Apellidos = Apellidos });
+                recargarLista();
             }
         }
 
@@ -191,17 +192,17 @@ namespace ProyectoFaltas.ViewModels
         {
             if (await App.Current.MainPage.DisplayAlert("Borrar Profesor", "Está seguro de borrar el profesor seleccionado?", "Confirmar", "Cancelar"))
             {
-                Profesor p = ListaProfesores.FirstOrDefault(p => p.Id == ItemId);
+                Profesor p = await database.GetProfesorAsync(ItemId);
                 if (p.Equals(ProfesorEditando))
                 {
                     ProfesorEditando = null;
                     Editando = false;
+                    await database.DeleteProfesorAsync(ListaProfesores.FirstOrDefault(p => p.Id == ItemId));
+                    recargarLista();
                 }
-                ListaProfesores.Remove(ListaProfesores.FirstOrDefault(p => p.Id == ItemId));
+
 
             }
-
-
         }
 
         //funcion del imagebutton que es para activar la modificacion
@@ -222,9 +223,11 @@ namespace ProyectoFaltas.ViewModels
                 if (!String.IsNullOrEmpty(NombreNuevo)) ProfesorEditando.Nombre = NombreNuevo;
                 if (!String.IsNullOrEmpty(ApellidosNuevo)) ProfesorEditando.Apellidos = ApellidosNuevo;
                 if (!String.IsNullOrEmpty(TipoNuevo)) ProfesorEditando.Tipo = TipoNuevo;
+                await database.SaveProfesorAsync(ProfesorEditando);
                 Editando = false;
                 ProfesorEditando = null;
                 NombreNuevo = ""; ApellidosNuevo = ""; TipoNuevo = "";
+                recargarLista();
             }
         }
 
