@@ -8,8 +8,11 @@
     Title="ProyectoFaltas"
     xmlns:views="clr-namespace:ProyectoFaltas.Views">
 
-    <TabBar>
+    <ShellContent
+        ContentTemplate="{DataTemplate views:HomePage}"
+        Route="HomePage"/>
 
+    <TabBar>
         <Tab Title="Creación Profesores">
             <ShellContent
                 ContentTemplate="{DataTemplate views:ViewCreateTeacher}"
