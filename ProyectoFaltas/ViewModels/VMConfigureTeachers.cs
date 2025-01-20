@@ -71,7 +71,7 @@ namespace ProyectoFaltas.ViewModels
         private string _nombre = "";
         private string _apellidos = "";
         private string _tipo = "";
-        private int _id = 0;
+        private int _id;
 
         public string Nombre
         {
@@ -172,6 +172,11 @@ namespace ProyectoFaltas.ViewModels
         public ICommand ModifyProfesorCommand { get; set; }
         public ICommand ActualizarProfesorCommand { get; set; }
         public ICommand CancelarActualizarProfesorCommand { get; set; }
+
+        private void recargarLista()
+        {
+
+        }
 
         public async void AddProfesor()
         {
