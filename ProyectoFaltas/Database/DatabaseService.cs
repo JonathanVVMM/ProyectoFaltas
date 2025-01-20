@@ -10,7 +10,6 @@ namespace ProyectoFaltas.Database
 {
     public class DatabaseService
     {
-
         private SQLiteAsyncConnection Database;
 
         public DatabaseService() { }

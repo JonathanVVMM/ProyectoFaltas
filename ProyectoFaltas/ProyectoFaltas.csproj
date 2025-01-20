@@ -65,7 +65,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\ViewCreateTeachers.xaml">
+	  <MauiXaml Update="Views\ViewCreateTeacher.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ViewEditTeachers.xaml">
