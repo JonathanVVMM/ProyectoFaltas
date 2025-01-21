@@ -188,6 +188,7 @@ namespace ProyectoFaltas.ViewModels
                 prof.Apellidos = Apellidos;
                 prof.Nombre = Nombre;
                 prof.Tipo = Tipo;
+                Tipo = ""; Apellidos = ""; Nombre = "";
 
                 await database.SaveProfesorAsync(prof);
                 recargarLista();
