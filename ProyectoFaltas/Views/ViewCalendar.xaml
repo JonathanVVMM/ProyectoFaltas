@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ProyectoFaltas.Views.ViewCalendar">
+             x:Class="ProyectoFaltas.Views.ViewCalendar"
+             xmlns:controls="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar" 
+             BackgroundColor="{StaticResource Gray200}">
+
+    <Grid ColumnDefinitions="*,2*" RowDefinitions="2*,*" Padding="20" ColumnSpacing="20">
+        <Frame Grid.Column="0" VerticalOptions="Start">
+            <controls:Calendar Events="{Binding Events}" BackgroundColor="LightBlue" 
+                   DayTappedCommand="{Binding DayTappedCommand}">
+
+            </controls:Calendar>
+        </Frame>
+
+        <Image Source="serraperenxisa.png" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" Aspect="AspectFit"/>
+        <!-- View for displaying selected event details -->
+        <CollectionView BackgroundColor="White" IsVisible="{Binding IsEventSelected}" Grid.Column="1" Grid.RowSpan="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="*,*,*">
+                        <Label Grid.Row="0" Text="{Binding SelectedEvent.Name}" FontAttributes="Bold" FontSize="Large" />
+                        <Label Grid.Row="1" Text="{Binding SelectedEvent.Description}" FontSize="Medium" LineBreakMode="WordWrap" />
+                        <Label Grid.Row="2" Text="{Binding SelectedEvent.Date}" FontSize="Medium" LineBreakMode="WordWrap" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 
 
 </ContentPage>
