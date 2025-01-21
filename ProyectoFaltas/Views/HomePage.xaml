@@ -6,7 +6,7 @@
 
     <Grid ColumnDefinitions="1*,*" ColumnSpacing="20" Padding="20">
 
-        <Frame Grid.Column="0" CornerRadius="10" BorderColor="White">
+        <Frame Grid.Column="0" CornerRadius="10">
 
             <Grid RowDefinitions="0.14*,2*">
                 <Grid>
