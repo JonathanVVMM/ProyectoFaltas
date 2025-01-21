@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Syncfusion.Maui.Core.Hosting;
 
 namespace ProyectoFaltas
 {
@@ -9,7 +8,6 @@ namespace ProyectoFaltas
         {
             var builder = MauiApp.CreateBuilder();
 
-            builder.ConfigureSyncfusionCore();
 
             builder
                 .UseMauiApp<App>()
