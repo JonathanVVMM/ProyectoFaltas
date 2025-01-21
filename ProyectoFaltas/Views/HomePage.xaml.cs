@@ -7,6 +7,11 @@ public partial class HomePage : ContentPage
         InitializeComponent();
     }
 
+    private async void Calendar_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//ViewCalendar");
+    }
+
     private async void CreateTeacher_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//ViewCreateTeacher");
@@ -16,4 +21,6 @@ public partial class HomePage : ContentPage
     {
         await Shell.Current.GoToAsync("//ViewEditTeacher");
     }
+
+
 }
