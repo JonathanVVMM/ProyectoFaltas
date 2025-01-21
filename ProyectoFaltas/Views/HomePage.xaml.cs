@@ -12,6 +12,11 @@ public partial class HomePage : ContentPage
         await Shell.Current.GoToAsync("//ViewCalendar");
     }
 
+    private async void FaltasMismoDia_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//ViewNonAttendanceDays");
+    }
+
     private async void CreateTeacher_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//ViewCreateTeacher");
@@ -22,5 +27,8 @@ public partial class HomePage : ContentPage
         await Shell.Current.GoToAsync("//ViewEditTeacher");
     }
 
-
+    private async void FaltasTeacher_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//ViewTeacherNonAttendances");
+    }
 }
