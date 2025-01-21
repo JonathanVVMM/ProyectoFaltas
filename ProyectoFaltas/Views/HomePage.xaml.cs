@@ -9,12 +9,7 @@ public partial class HomePage : ContentPage
 
     private async void Calendar_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("ViewCalendar");
-    }
-
-    private async void FaltasMismoDia_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("ViewNonAttendanceDays");
+        await Shell.Current.GoToAsync("//ViewCalendar");
     }
 
     private async void CreateTeacher_Clicked(object sender, EventArgs e)

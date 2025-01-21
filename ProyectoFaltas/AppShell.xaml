@@ -13,11 +13,16 @@
         Route="HomePage"/>
 
     <TabBar>
+        <Tab Title="Calendario">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:ViewCalendar}"
+                Route="ViewCalendar"/>
+        </Tab>
+
         <Tab Title="Creación Profesores">
             <ShellContent
                 ContentTemplate="{DataTemplate views:ViewCreateTeacher}"
                 Route="ViewCreateTeacher"/>
-
         </Tab>
 
         <Tab Title="Editar Profesores">
@@ -25,8 +30,6 @@
                 ContentTemplate="{DataTemplate views:ViewEditTeacher}"
                 Route="ViewEditTeacher"/>
         </Tab>
-
-
     </TabBar>
 
 </Shell>

@@ -86,9 +86,6 @@
 	  <MauiXaml Update="Views\ViewEditTeacher.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ViewNonAttendanceDays.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\ViewTeacherNonAttendances.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
