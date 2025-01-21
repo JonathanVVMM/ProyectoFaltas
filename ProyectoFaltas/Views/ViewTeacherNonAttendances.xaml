@@ -4,8 +4,55 @@
              x:Class="ProyectoFaltas.Views.ViewTeacherNonAttendances"
              BackgroundColor="{StaticResource Gray200}">
 
-    <Grid>
+    <Grid ColumnDefinitions="*,1.5*" Padding="20" ColumnSpacing="20">
+
+        <Frame Grid.Column="0" VerticalOptions="Start" IsEnabled="False">
+
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Profesor del que son las faltas" HorizontalOptions="Center"/>
+
+                <VerticalStackLayout>
+                    <Grid RowDefinitions="*,*,*" RowSpacing="10">
+
+                        <VerticalStackLayout Grid.Row="0">
+                            <Label Text="Nombre"/>
+                            <Entry  Text="{Binding ProfesorEditando.Nombre}" BackgroundColor="LightGray"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Row="1">
+                            <Label Text="Apellidos" />
+                            <Entry  Text="{Binding ProfesorEditando.Apellidos}"  BackgroundColor="LightGray"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Row="2">
+                            <Label Text="Tipo" />
+                            <Entry Text="{Binding ProfesorEditando.Tipo}"  BackgroundColor="LightGray"/>
+                        </VerticalStackLayout>
+
+                    </Grid>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </Frame>
+
+        <Frame Grid.Column="1">
+
+            <Grid RowDefinitions="auto,auto">
+                <Grid ColumnDefinitions="auto,*" Grid.Row="0" ColumnSpacing="10">
+                    <Label Grid.Column="0" Text="Buscar falta: " VerticalOptions="Center"/>
+                    <Entry Grid.Column="1" Placeholder="Jonathan" VerticalOptions="Center"/>
+                </Grid>
+              
+            </Grid>
+
+            
+
+        </Frame>
+
+        <Button Text="Volver atrás" VerticalOptions="End" HorizontalOptions="Start"/>
 
     </Grid>
+    
+    
 
 </ContentPage>
