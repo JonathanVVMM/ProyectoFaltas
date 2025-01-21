@@ -72,8 +72,23 @@ namespace ProyectoFaltas.ViewModels
         // Propiedades
         private string _nombre = "";
         private string _apellidos = "";
-        private string _tipo = "";
+        private string _tipo = "Interino";
+        private string _estado = "Activo";
         private int _id;
+
+        public string Estado
+        {
+            get => _estado;
+            set
+            {
+                if (_estado != value)
+                {
+                    _estado = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         public string Nombre
         {
@@ -150,6 +165,13 @@ namespace ProyectoFaltas.ViewModels
             set { _tipoNuevo = value; OnPropertyChanged(); }
         }
 
+        private string _estadoNuevo;
+        public string EstadoNuevo
+        {
+            get { return _estadoNuevo; }
+            set { _estadoNuevo = value; OnPropertyChanged(); }
+        }
+
         private Profesor _profesorEditando;
         public Profesor ProfesorEditando
         {
@@ -182,13 +204,14 @@ namespace ProyectoFaltas.ViewModels
 
         public async void AddProfesor()
         {
-            if (Tipo != "" && Apellidos != "" && Nombre != "")
+            if (Apellidos != "" && Nombre != "")
             {
                 Profesor prof = new Profesor();
                 prof.Apellidos = Apellidos;
                 prof.Nombre = Nombre;
                 prof.Tipo = Tipo;
-                Tipo = ""; Apellidos = ""; Nombre = "";
+                prof.Estado = Estado;
+                Apellidos = ""; Nombre = "";
 
                 await database.SaveProfesorAsync(prof);
                 recargarLista();
@@ -230,10 +253,11 @@ namespace ProyectoFaltas.ViewModels
                 if (!String.IsNullOrEmpty(NombreNuevo)) ProfesorEditando.Nombre = NombreNuevo;
                 if (!String.IsNullOrEmpty(ApellidosNuevo)) ProfesorEditando.Apellidos = ApellidosNuevo;
                 if (!String.IsNullOrEmpty(TipoNuevo)) ProfesorEditando.Tipo = TipoNuevo;
+                if (!String.IsNullOrEmpty(EstadoNuevo)) ProfesorEditando.Estado = EstadoNuevo;
                 await database.SaveProfesorAsync(ProfesorEditando);
                 Editando = false;
                 ProfesorEditando = null;
-                NombreNuevo = ""; ApellidosNuevo = ""; TipoNuevo = "";
+                NombreNuevo = ""; ApellidosNuevo = ""; TipoNuevo = ""; EstadoNuevo = "";
                 recargarLista();
             }
         }
@@ -244,7 +268,7 @@ namespace ProyectoFaltas.ViewModels
             {
                 ProfesorEditando = null;
                 Editando = false;
-                ApellidosNuevo = ""; NombreNuevo = ""; TipoNuevo = "";
+                ApellidosNuevo = ""; NombreNuevo = ""; TipoNuevo = ""; EstadoNuevo = "";
             }
         }
 

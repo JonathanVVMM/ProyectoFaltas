@@ -13,7 +13,7 @@
                                SelectedDayBackgroundColor="#2F593A" SelectedDateColor="#2F593A"
                                TodayOutlineColor="#2F593A" ArrowsBackgroundColor="#2F593A"
                                ArrowsBorderColor="White" ArrowsColor="White"
-                               FooterArrowVisible="False" FooterSectionVisible="False" >
+                               FooterArrowVisible="False" FooterSectionVisible="False">
 
             </controls:Calendar>
         </Frame>

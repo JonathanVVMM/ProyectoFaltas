@@ -18,38 +18,14 @@ namespace ProyectoFaltas.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private string _nombre;
-        private string _apellidos;
-        private string _tipo;
+        public string Nombre { get; set; }
+        public string Apellidos { get; set; }
+        public string Tipo { get; set; }
+        public string Estado { get; set; }
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Nombre
-        {
-            get => _nombre;
-            set
-            {
-                _nombre = value; OnPropertyChanged();
-            }
-        }
-
-        public string Apellidos
-        {
-            get => _apellidos;
-            set
-            {
-                _apellidos = value; OnPropertyChanged();
-            }
-        }
-
-        public string Tipo
-        {
-            get => _tipo;
-            set
-            {
-                _tipo = value; OnPropertyChanged();
-            }
-        }
+        
     }
 }

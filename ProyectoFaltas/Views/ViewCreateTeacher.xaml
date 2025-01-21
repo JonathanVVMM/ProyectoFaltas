@@ -9,7 +9,7 @@
 
         <Frame Grid.Column="0" CornerRadius="10">
 
-            <Grid RowDefinitions="0.14*,1.8*">
+            <Grid RowDefinitions="auto,*">
                 <Grid>
                     <Label Text="Lista de profesor" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
@@ -31,7 +31,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Frame CornerRadius="0" Padding="10">
-                                        <Grid RowDefinitions="auto,auto,auto" RowSpacing="0">
+                                        <Grid RowDefinitions="auto,auto,auto,auto" RowSpacing="0">
 
                                             <HorizontalStackLayout Spacing="10">
                                                 <Label Text="Nombre:"/>
@@ -48,6 +48,11 @@
                                                 <Label Text="{Binding Tipo}"/>
                                             </HorizontalStackLayout>
 
+                                            <HorizontalStackLayout Grid.Row="3" Spacing="10">
+                                                <Label Text="Estado: "/>
+                                                <Label Text="{Binding Estado}"/>
+                                            </HorizontalStackLayout>
+
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
@@ -60,14 +65,14 @@
 
         </Frame>
 
-        <Grid Grid.Column="1" RowDefinitions="1.5*,*">
+        <Grid Grid.Column="1" RowDefinitions="auto,*">
 
             <Image Grid.Row="1" Source="serraperenxisa.png" Aspect="Center"/>
             <Frame  CornerRadius="10" VerticalOptions="Center">
 
                 <VerticalStackLayout Spacing="10">
                     <Label Text="Nuevo Profesor" HorizontalOptions="Center"/>
-                    <Grid RowDefinitions="*,*,*,*" RowSpacing="20">
+                    <Grid RowDefinitions="*,*,*,*,*" RowSpacing="20">
                         <VerticalStackLayout Grid.Row="0">
                             <Label Text="Nombre"/>
                             <Entry x:Name="eNombre" Text="{Binding Nombre, Mode=TwoWay}"/>
@@ -80,7 +85,7 @@
 
                         <VerticalStackLayout Grid.Row="2">
                             <Label Text="Tipo" />
-                            <Picker x:Name="picker" SelectedItem="{Binding Tipo, Mode=TwoWay}">
+                            <Picker SelectedItem="{Binding Tipo, Mode=TwoWay}" SelectedIndex="1">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Interino</x:String>
@@ -88,11 +93,21 @@
                                     </x:Array>
                                 </Picker.ItemsSource>
                             </Picker>
-
-
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="3">
+                            <Label Text="Estado" />
+                            <Picker SelectedItem="{Binding Estado, Mode=TwoWay}" SelectedIndex="1">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Activo</x:String>
+                                        <x:String>Inactivo</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Row="4">
                             <Button x:Name="bCrearProfesor" Text="Añadir profesor a la lista" Command="{Binding AddProfesorCommand}"/>
 
                         </VerticalStackLayout>

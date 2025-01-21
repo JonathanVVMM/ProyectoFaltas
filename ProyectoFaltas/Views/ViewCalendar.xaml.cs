@@ -68,6 +68,9 @@ namespace ProyectoFaltas.Views
             public string Description { get; set; }
             public DateTime Date { get; set; } // Nueva propiedad Date
         }
+
+        
+
     }
 }
 

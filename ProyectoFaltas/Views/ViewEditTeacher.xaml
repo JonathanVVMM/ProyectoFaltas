@@ -10,7 +10,7 @@
 
         <Frame Grid.Column="0" CornerRadius="10">
 
-            <Grid RowDefinitions="0.14*,1.8*">
+            <Grid RowDefinitions="auto,*">
                 <Grid>
                     <Label Text="Lista de profesores" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
@@ -32,7 +32,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Frame CornerRadius="0" Padding="10" Margin="0" HasShadow="False">
-                                        <Grid RowDefinitions="AUTO,AUTO,AUTO,AUTO">
+                                        <Grid RowDefinitions="AUTO,AUTO,AUTO,AUTO,AUTO">
 
                                             <HorizontalStackLayout Grid.Row="0" Spacing="10">
                                                 <Label Text="Nombre:"/>
@@ -48,8 +48,13 @@
                                                 <Label Text="Tipo: "/>
                                                 <Label Text="{Binding Tipo}"/>
                                             </HorizontalStackLayout>
+                                            
+                                            <HorizontalStackLayout Grid.Row="3" Spacing="10">
+                                                <Label Text="Estado: "/>
+                                                <Label Text="{Binding Estado}"/>
+                                            </HorizontalStackLayout>
 
-                                            <Grid ColumnDefinitions="*,*" Grid.Row="3">
+                                            <Grid ColumnDefinitions="auto,*" Grid.Row="4">
                                                 <ImageButton Source="editar.png"
                                                              Grid.Column="0" HorizontalOptions="Center" Aspect="AspectFit"
                                                              HeightRequest="40"
@@ -90,7 +95,7 @@
                     <Label Text="Datos del profesor en edición" HorizontalOptions="Center"/>
 
                     <VerticalStackLayout>
-                        <Grid RowDefinitions="*,*,*" RowSpacing="10">
+                        <Grid RowDefinitions="*,*,*,*" RowSpacing="10">
 
                             <VerticalStackLayout Grid.Row="0">
                                 <Label Text="Nombre"/>
@@ -105,6 +110,11 @@
                             <VerticalStackLayout Grid.Row="2">
                                 <Label Text="Tipo" />
                                 <Entry x:Name="eTipoActual" Text="{Binding ProfesorEditando.Tipo}"  BackgroundColor="LightGray"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Row="3">
+                                <Label Text="Estado" />
+                                <Entry x:Name="eEstadoActual" Text="{Binding ProfesorEditando.Estado}"  BackgroundColor="LightGray"/>
                             </VerticalStackLayout>
 
                         </Grid>
@@ -124,7 +134,7 @@
                                      BackgroundColor="Transparent" IsEnabled="True"
                                      Command="{Binding IconoAyudaActualizarDatosCommand}"/>
                     </Grid>
-                    <Grid RowDefinitions="*,*,*,*" RowSpacing="10" IsEnabled="{Binding Editando}">
+                    <Grid RowDefinitions="*,*,*,*,*" RowSpacing="10" IsEnabled="{Binding Editando}">
                         <VerticalStackLayout Grid.Row="0">
                             <Label Text="Nombre"/>
                             <Entry x:Name="eNombreNuevo" Text="{Binding NombreNuevo, Mode=TwoWay}"/>
@@ -137,7 +147,7 @@
 
                         <VerticalStackLayout Grid.Row="2">
                             <Label Text="Tipo" />
-                            <Picker x:Name="picker" SelectedItem="{Binding TipoNuevo, Mode=TwoWay}">
+                            <Picker SelectedItem="{Binding TipoNuevo, Mode=TwoWay}" SelectedIndex="1">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Interino</x:String>
@@ -147,7 +157,19 @@
                             </Picker>
                         </VerticalStackLayout>
 
-                        <Grid Grid.Row="3" ColumnDefinitions="2*,*" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Row="3">
+                            <Label Text="Estado" />
+                            <Picker SelectedItem="{Binding EstadoNuevo, Mode=TwoWay}" SelectedIndex="1">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Activo</x:String>
+                                        <x:String>Inactivo</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </VerticalStackLayout>
+
+                        <Grid Grid.Row="4" ColumnDefinitions="2*,*" ColumnSpacing="10">
                             <Button x:Name="bActualizarProfesor" Text="Actualizar datos rellenados" Command="{Binding ActualizarProfesorCommand}"/>
                             <Button Grid.Column="1" x:Name="bCancelarActualizarProfesor" Text="Cancelar" Command="{Binding CancelarActualizarProfesorCommand}" BackgroundColor="Red"/>
                         </Grid>

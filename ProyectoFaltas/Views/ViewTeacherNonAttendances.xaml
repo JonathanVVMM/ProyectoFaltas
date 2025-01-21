@@ -40,7 +40,7 @@
             <Grid RowDefinitions="auto,auto">
                 <Grid ColumnDefinitions="auto,*" Grid.Row="0" ColumnSpacing="10">
                     <Label Grid.Column="0" Text="Buscar falta: " VerticalOptions="Center"/>
-                    <Entry Grid.Column="1" Placeholder="Jonathan" VerticalOptions="Center"/>
+                    <Entry Grid.Column="1" Placeholder="año | formato = aaaa/aaaa | ejemplo = 2024/2025" VerticalOptions="Center"/>
                 </Grid>
               
             </Grid>
@@ -49,7 +49,8 @@
 
         </Frame>
 
-        <Button Text="Volver atrás" VerticalOptions="End" HorizontalOptions="Start"/>
+        <Button Text="Volver a Calendario" VerticalOptions="End" HorizontalOptions="Start"/>
+        <Button Text="Volver a Crear Profesores" VerticalOptions="End" HorizontalOptions="End"/>
 
     </Grid>
     
