@@ -30,6 +30,12 @@
                 ContentTemplate="{DataTemplate views:ViewEditTeacher}"
                 Route="ViewEditTeacher"/>
         </Tab>
+
+        <Tab Title="Editar Tipos Faltas">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:ViewTiposFaltas}"
+                Route="ViewTiposFaltas"/>
+        </Tab>
     </TabBar>
 
 </Shell>

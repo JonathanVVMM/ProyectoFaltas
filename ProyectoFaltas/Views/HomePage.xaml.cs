@@ -22,8 +22,8 @@ public partial class HomePage : ContentPage
         await Shell.Current.GoToAsync("//ViewEditTeacher");
     }
 
-    private async void FaltasTeacher_Clicked(object sender, EventArgs e)
+    private async void Crear_Curso_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("ViewTeacherNonAttendances");
+        await Shell.Current.GoToAsync("viewCreateYear");
     }
 }

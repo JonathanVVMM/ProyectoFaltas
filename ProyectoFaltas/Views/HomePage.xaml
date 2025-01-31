@@ -23,28 +23,28 @@
                         <Frame Grid.Row="0">
                             <Grid ColumnDefinitions="*,auto">
                                 <Label Text="Calendario" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center"></Label>
-                                <Button  Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="Calendar" Clicked="Calendar_Clicked"></Button>
+                                <Button  Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="Crear curso" x:Name="Crear_Curso" Clicked="Crear_Curso_Clicked"></Button>
                             </Grid>
                         </Frame>
 
                         <Frame Grid.Row="1">
+                            <Grid ColumnDefinitions="*,auto">
+                                <Label Text="Calendario" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center"></Label>
+                                <Button  Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="Calendar" Clicked="Calendar_Clicked"></Button>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Grid.Row="2">
                             <Grid ColumnDefinitions="*,auto">
                                 <Label Text="Creacion profesores" Grid.Column="0" VerticalTextAlignment="Center"></Label>
                                 <Button Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="CreateTeacher" Clicked="CreateTeacher_Clicked"></Button>
                             </Grid>
                         </Frame>
 
-                        <Frame Grid.Row="2">
+                        <Frame Grid.Row="3">
                             <Grid ColumnDefinitions="*,auto">
                                 <Label Text="Edición profesores" Grid.Column="0" VerticalTextAlignment="Center"></Label>
                                 <Button Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="EditTeacher" Clicked="EditTeacher_Clicked"></Button>
-                            </Grid>
-                        </Frame>
-
-                        <Frame Grid.Row="3">
-                            <Grid ColumnDefinitions="*,auto">
-                                <Label Text="Faltas de profesor" Grid.Column="0" VerticalTextAlignment="Center"></Label>
-                                <Button Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="FaltasTeacher" Clicked="FaltasTeacher_Clicked"></Button>
                             </Grid>
                         </Frame>
                     </Grid>
