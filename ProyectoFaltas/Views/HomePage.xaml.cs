@@ -7,6 +7,11 @@ public partial class HomePage : ContentPage
         InitializeComponent();
     }
 
+    private async void Crear_Curso_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("viewCreateYear");
+    }
+
     private async void Calendar_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//ViewCalendar");
@@ -22,8 +27,8 @@ public partial class HomePage : ContentPage
         await Shell.Current.GoToAsync("//ViewEditTeacher");
     }
 
-    private async void Crear_Curso_Clicked(object sender, EventArgs e)
+    private async void EditFaltas_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("viewCreateYear");
+        await Shell.Current.GoToAsync("//ViewTiposFaltas");
     }
 }
