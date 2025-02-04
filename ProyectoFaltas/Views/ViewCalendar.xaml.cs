@@ -5,11 +5,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using ProyectoFaltas.Database;
 
 namespace ProyectoFaltas.Views
 {
     public partial class ViewCalendar : ContentPage, INotifyPropertyChanged
     {
+        private DatabaseService database = new DatabaseService();
+
         public ObservableCollection<Event> Events { get; set; }
         private Event _selectedEvent;
 
@@ -24,6 +27,17 @@ namespace ProyectoFaltas.Views
                     OnPropertyChanged(nameof(SelectedEvent));
                     OnPropertyChanged(nameof(IsEventSelected));
                 }
+            }
+        }
+
+        private List<Falta> _listaFaltas;
+
+        public List<Falta> ListaFaltas
+        {
+            get => _listaFaltas;
+            set
+            {
+                _listaFaltas = value;
             }
         }
 
@@ -85,6 +99,11 @@ namespace ProyectoFaltas.Views
         {
             DateTime fechaActual = DateTime.Now;
             Events.Add(new Event { Date = fechaActual });
+        }
+
+        private async void recargarLista()
+        {
+            ListaFaltas = database.GetFaltasAsync();
         }
     }
 }
