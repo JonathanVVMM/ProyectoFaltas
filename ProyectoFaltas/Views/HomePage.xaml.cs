@@ -17,13 +17,18 @@ public partial class HomePage : ContentPage, INotifyPropertyChanged
         BindingContext = this;
     }
 
+    public bool CursoSeleccionado => CursoBindeado != null;
     public Curso CursoBindeado
     {
         get => Curso.CursoActual;
         set
         {
-            Curso.CursoActual = value;
-            OnPropertyChanged();
+            if (Curso.CursoActual != value)
+            {
+                Curso.CursoActual = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CursoSeleccionado));
+            }
         }
     }
 

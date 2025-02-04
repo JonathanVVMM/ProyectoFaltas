@@ -26,9 +26,10 @@
                             <Grid ColumnDefinitions="*,auto,auto">
                                 <Picker Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center"
                                         ItemsSource="{Binding ListaCursos}" ItemDisplayBinding="{Binding NombreCurso}" SelectedItem="{Binding CursoBindeado, Mode=TwoWay}" />
-                                
-                                <Label Text="{Binding CursoBindeado.NombreCurso}" Grid.Column="2"/> <!--ESTO HAY QUE QUITARLO EN UN FUTURO, JUNTO CON UN AUTO DE ARRIBA-->
-                                
+
+                                <Label Text="{Binding CursoBindeado.NombreCurso}" Grid.Column="2"/>
+                                <!--ESTO HAY QUE QUITARLO EN UN FUTURO, JUNTO CON UN AUTO DE ARRIBA-->
+
                                 <Button  Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="Crear curso" x:Name="Crear_Curso" Clicked="Crear_Curso_Clicked"></Button>
                             </Grid>
                         </Frame>
@@ -36,28 +37,28 @@
                         <Frame Grid.Row="1">
                             <Grid ColumnDefinitions="*,auto">
                                 <Label Text="Calendario" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center"></Label>
-                                <Button  Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="Calendar" Clicked="Calendar_Clicked"></Button>
+                                <Button  Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="Calendar" Clicked="Calendar_Clicked" IsEnabled="{Binding CursoSeleccionado}"></Button>
                             </Grid>
                         </Frame>
 
                         <Frame Grid.Row="2">
                             <Grid ColumnDefinitions="*,auto">
                                 <Label Text="Creacion profesores" Grid.Column="0" VerticalTextAlignment="Center"></Label>
-                                <Button Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="CreateTeacher" Clicked="CreateTeacher_Clicked"></Button>
+                                <Button Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="CreateTeacher" Clicked="CreateTeacher_Clicked" IsEnabled="{Binding CursoSeleccionado}"></Button>
                             </Grid>
                         </Frame>
 
                         <Frame Grid.Row="3">
                             <Grid ColumnDefinitions="*,auto">
                                 <Label Text="Edición profesores" Grid.Column="0" VerticalTextAlignment="Center"></Label>
-                                <Button Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="EditTeacher" Clicked="EditTeacher_Clicked"></Button>
+                                <Button Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="EditTeacher" Clicked="EditTeacher_Clicked" IsEnabled="{Binding CursoSeleccionado}"></Button>
                             </Grid>
                         </Frame>
 
                         <Frame Grid.Row="4">
                             <Grid ColumnDefinitions="*,auto">
                                 <Label Text="Editar Tipos Faltas" Grid.Column="0" VerticalTextAlignment="Center"></Label>
-                                <Button Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="EditFaltas" Clicked="EditFaltas_Clicked"></Button>
+                                <Button Grid.Column="1" VerticalOptions="Center" Text="Ir" x:Name="EditFaltas" Clicked="EditFaltas_Clicked" IsEnabled="{Binding CursoSeleccionado}"></Button>
                             </Grid>
                         </Frame>
                     </Grid>
