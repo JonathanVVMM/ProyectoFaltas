@@ -59,18 +59,14 @@ namespace ProyectoFaltas.Views
         public ViewCalendar()
         {
             InitializeComponent();
-            Events = new ObservableCollection<Event>
-            {
-                new Event { Name = "Evento 1", Description = "Descripción del Evento 1", Date = new DateTime(2025, 1, 21) },
-                new Event { Name = "Evento 2", Description = "Descripción del Evento 2", Date = new DateTime(2025, 1, 21) }
-            };
+            recargarLista();
             DayTappedCommand = new Command<DateTime>(OnDayTapped);  // Enlazamos el comando
             BindingContext = this; // Set the BindingContext
         }
 
         private void OnDayTapped(DateTime selectedDate)
         {
-            // Filtrar eventos según la fecha seleccionada
+            // Filtrar eventos segÃºn la fecha seleccionada
             SelectedEvent = Events.FirstOrDefault(evento => evento.Date.Date == selectedDate);
             SelectedDay = selectedDate;
             // Si no hay evento en esa fecha, se puede limpiar el evento seleccionado
