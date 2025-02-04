@@ -36,8 +36,10 @@ public partial class viewCreateYear : ContentPage
         await SeleccionarCursoAsync();
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
-
+        var nuevoCurso = new Curso { NombreCurso = "Nuevo Curso" };
+        await _databaseService.AddCursoAsync(nuevoCurso);
+        await SeleccionarCursoAsync(nuevoCurso.Id);
     }
 }
