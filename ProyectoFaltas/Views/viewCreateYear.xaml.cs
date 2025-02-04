@@ -15,7 +15,9 @@ public partial class viewCreateYear : ContentPage
         _databaseService = new DatabaseService();
         Profesores = new ObservableCollection<Profesor>();
         _ = CargarProfesoresDelUltimoAnoAsync();
+        BindingContext = this;
     }
+
 
     public async Task SeleccionarCursoAsync(int? cursoId = null)
     {
@@ -36,9 +38,20 @@ public partial class viewCreateYear : ContentPage
         await SeleccionarCursoAsync();
     }
 
+    private string _nombre = "";
+    public string Nombre
+    {
+        get => _nombre;
+        set
+        {
+            _nombre = value;
+            OnPropertyChanged();
+        }
+    }
+
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        var nuevoCurso = new Curso { NombreCurso = "Nuevo Curso" };
+        var nuevoCurso = new Curso { NombreCurso = Nombre };
         await _databaseService.AddCursoAsync(nuevoCurso);
         await SeleccionarCursoAsync(nuevoCurso.Id);
     }

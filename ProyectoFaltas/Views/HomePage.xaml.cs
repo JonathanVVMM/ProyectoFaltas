@@ -17,6 +17,16 @@ public partial class HomePage : ContentPage, INotifyPropertyChanged
         BindingContext = this;
     }
 
+    public Curso CursoBindeado
+    {
+        get => Curso.CursoActual;
+        set
+        {
+            Curso.CursoActual = value;
+            OnPropertyChanged();
+        }
+    }
+
     public async void cargarCursos()
     {
         ListaCursos = new ObservableCollection<Curso>(await database.GetCursosAsync());

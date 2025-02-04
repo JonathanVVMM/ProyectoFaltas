@@ -59,10 +59,11 @@ namespace ProyectoFaltas.Views
         public ViewCalendar()
         {
             InitializeComponent();
-            recargarLista();
             DayTappedCommand = new Command<DateTime>(OnDayTapped);  // Enlazamos el comando
-            BindingContext = this; // Set the BindingContext
+            recargarLista();
         }
+
+
 
         private void OnDayTapped(DateTime selectedDate)
         {
@@ -100,16 +101,19 @@ namespace ProyectoFaltas.Views
 
         private async void recargarLista()
         {
+            //await DisplayAlert(Curso.CursoActual.NombreCurso, "Hola", "Salir");
+
             if (Curso.CursoActual != null)
             {
                 ListaFaltas = new ObservableCollection<Falta>(await database.GetFaltasAsync(Curso.CursoActual.Id));
                 Events = new ObservableCollection<Event>();
                 foreach (Falta item in ListaFaltas)
                 {
-                    Events.Add(new Event { Date = item.Fecha });
+                   Events.Add(new Event { Date = item.Fecha });
                 }
-            }
+                BindingContext = this; // lo ponemos aqui para que termine el recargarLista antes que se bindee
 
+            }
         }
     }
 }
