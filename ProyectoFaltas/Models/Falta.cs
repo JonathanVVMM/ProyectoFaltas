@@ -10,19 +10,19 @@ namespace ProyectoFaltas.Models
     public class Falta
     {
         [PrimaryKey, AutoIncrement]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public DateTime Fecha { get; set; }
 
         [Indexed]
-        public long IdProfesores { get; set; }
+        public int IdProfesores { get; set; }
 
         [Indexed]
-        public long IdTipoFalta { get; set; }
+        public int IdTipoFalta { get; set; }
 
         public DateTime UltimaModificacion { get; set; }
 
         [Indexed]
-        public long IdCursos { get; set; }
+        public int IdCursos { get; set; }
     }
 }

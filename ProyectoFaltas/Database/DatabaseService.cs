@@ -42,6 +42,8 @@ namespace ProyectoFaltas.Database
             await Init();
             return await Database.Table<Activo>().Where(i => i.Id == id).FirstOrDefaultAsync(); //Similar a SQL
         }
+
+        // Permite borrar a un profesor activo en un curso, PERO el profesor asi quede inactivo en ese curso no será eliminado de la tabla
         public async Task<int> DeleteActivoAsync(Activo activo)
         {
             await Init();
@@ -49,19 +51,34 @@ namespace ProyectoFaltas.Database
         }
 
 
+        // Obtener los profesores activos de un curso en especifico
+        public async Task<List<Profesor>> GetProfesoresActivosPorCursoAsync(int idCurso)
+        {
+            await Init();
+            var activos = await Database.Table<Activo>().Where(a => a.IdCursos == idCurso).ToListAsync();
+            var profesoresIds = activos.Select(a => a.IdProfesores).ToList();
+            return await Database.Table<Profesor>().Where(p => profesoresIds.Contains(p.Id)).ToListAsync();
+        }
+
+
+
         // -------------------------- TABLA CURSO -------------------------- 
+
+        // Crea un curso
         public async Task<int> AddCursoAsync(Curso curso)
         {
             await Init();
             return await Database.InsertAsync(curso);
         }
 
+        // Lista los cursos existentes
         public async Task<List<Curso>> GetCursosAsync()
         {
             await Init();
             return await Database.Table<Curso>().ToListAsync();
         }
 
+        // Obtiene el curso seleccionado
         public async Task<Curso> GetCursoAsync(int id)
         {
             await Init();
@@ -82,10 +99,18 @@ namespace ProyectoFaltas.Database
             return await Database.InsertAsync(falta);
         }
 
-        public async Task<List<Falta>> GetFaltasAsync()
+        // Devuelve las faltas generadas en un curso
+        public async Task<List<Falta>> GetFaltasAsync(int idCurso)
         {
             await Init();
-            return await Database.Table<Falta>().ToListAsync();
+            return await Database.Table<Falta>().Where(i => i.IdCursos == idCurso).ToListAsync();
+        }
+
+        // Devuelve las faltas de un dia en especifico
+        public async Task<List<Falta>> GetFaltasPorDiaAsync(DateTime fecha)
+        {
+            await Init();
+            return await Database.Table<Falta>().Where(i => i.Fecha == fecha).ToListAsync();
         }
 
         public async Task<Falta> GetFaltaAsync(int id)
@@ -151,6 +176,8 @@ namespace ProyectoFaltas.Database
         }
 
         // -------------------------- TABLA PROFESOR --------------------------
+
+        // Se registra un profesor nuevo
         public async Task<int> SaveProfesorAsync(Profesor profesor)
         {
             await Init();
