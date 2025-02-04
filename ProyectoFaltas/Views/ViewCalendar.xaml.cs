@@ -30,14 +30,15 @@ namespace ProyectoFaltas.Views
             }
         }
 
-        private List<Falta> _listaFaltas;
+        private ObservableCollection<Falta> _listaFaltas;
 
-        public List<Falta> ListaFaltas
+        public ObservableCollection<Falta> ListaFaltas
         {
             get => _listaFaltas;
             set
             {
                 _listaFaltas = value;
+                OnPropertyChanged();
             }
         }
 
@@ -103,7 +104,18 @@ namespace ProyectoFaltas.Views
 
         private async void recargarLista()
         {
-            ListaFaltas = database.GetFaltasAsync();
+            if (Curso.CursoActual != null)
+            {
+                ListaFaltas = new ObservableCollection<Falta>(await database.GetFaltasAsync(Curso.CursoActual.Id));
+                Events = new ObservableCollection<Event>();
+                foreach (Falta item in ListaFaltas)
+                {
+                    Events.Add(new Event { Date = item.Fecha });
+                }
+            }
+
+
+
         }
     }
 }
