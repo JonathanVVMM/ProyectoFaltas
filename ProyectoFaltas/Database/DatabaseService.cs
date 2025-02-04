@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static CoreFoundation.DispatchSource;
+
 
 namespace ProyectoFaltas.Database
 {
@@ -54,6 +54,13 @@ namespace ProyectoFaltas.Database
             return await Database.DeleteAsync(activo);
         }
 
+        //Obetener el ultimo curso
+        public async Task<int?> GetUltimoAnoCursoAsync()
+        {
+            await Init();
+            var cursoMasReciente = await Database.Table<Curso>().OrderByDescending(c => c.Id).FirstOrDefaultAsync();
+            return cursoMasReciente != null ? (int?)cursoMasReciente.Id : null;
+        }
 
         // Obtener los profesores activos de un curso en especifico
         public async Task<List<Profesor>> GetProfesoresActivosPorCursoAsync(int idCurso)
