@@ -35,4 +35,9 @@ public partial class viewCreateYear : ContentPage
     {
         await SeleccionarCursoAsync();
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }

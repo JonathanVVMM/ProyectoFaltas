@@ -1,10 +1,41 @@
+using ProyectoFaltas.Database;
+using ProyectoFaltas.Models;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 namespace ProyectoFaltas.Views;
 
-public partial class HomePage : ContentPage
+public partial class HomePage : ContentPage, INotifyPropertyChanged
 {
+    private DatabaseService database = new DatabaseService();
+
     public HomePage()
     {
         InitializeComponent();
+        cargarCursos();
+    }
+
+    public async void cargarCursos()
+    {
+        ListaCursos = new ObservableCollection<Curso>(await database.GetCursosAsync());
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private ObservableCollection<Curso> _ListaCursos;
+    public ObservableCollection<Curso> ListaCursos
+    {
+        get => _ListaCursos;
+        set
+        {
+            _ListaCursos = value; OnPropertyChanged();
+        }
     }
 
     private async void Crear_Curso_Clicked(object sender, EventArgs e)
