@@ -4,6 +4,8 @@
              x:Class="ProyectoFaltas.Views.HomePage"
              BackgroundColor="{StaticResource Gray200}">
 
+
+
     <Grid ColumnDefinitions="1*,*" ColumnSpacing="20" Padding="20">
 
         <Frame Grid.Column="0" CornerRadius="10">
@@ -22,7 +24,8 @@
                     <Grid ColumnDefinitions="*,auto" RowDefinitions="auto,auto,auto,auto,auto" RowSpacing="10">
                         <Frame Grid.Row="0">
                             <Grid ColumnDefinitions="*,auto">
-                                <Label Text="Calendario" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center"></Label>
+                                <Picker Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center"
+                                        ItemsSource="{Binding ListaCursos}" ItemDisplayBinding="{Binding NombreCurso}"/>
                                 <Button  Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Text="Crear curso" x:Name="Crear_Curso" Clicked="Crear_Curso_Clicked"></Button>
                             </Grid>
                         </Frame>

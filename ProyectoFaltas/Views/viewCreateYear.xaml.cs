@@ -25,7 +25,7 @@ public partial class viewCreateYear : ContentPage
             if (!cursoId.HasValue)
                 return;
         }
-
+        Curso.CursoActual = await _databaseService.GetCursoAsync(cursoId.Value);
         var profesores = await _databaseService.GetProfesoresActivosPorCursoAsync(cursoId.Value);
         Profesores = new ObservableCollection<Profesor>(profesores.Distinct());
         OnPropertyChanged(nameof(Profesores));

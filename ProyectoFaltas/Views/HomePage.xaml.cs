@@ -14,6 +14,7 @@ public partial class HomePage : ContentPage, INotifyPropertyChanged
     {
         InitializeComponent();
         cargarCursos();
+        BindingContext = this;
     }
 
     public async void cargarCursos()
