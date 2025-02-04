@@ -47,7 +47,6 @@ namespace ProyectoFaltas.ViewModels
         {
             RecuperarTiposFaltas();
             AddElementCommand = new Command(AddElement);
-
         }
 
         //---------------------------------------------------------- INTRODUCIDOS USUARIO ----------------------------------------------------------
@@ -64,8 +63,8 @@ namespace ProyectoFaltas.ViewModels
         }
 
         // Color
-        private string _selectedColor;
-        public string SelectedColor
+        private ColorOption _selectedColor;
+        public ColorOption SelectedColor
         {
             get { return _selectedColor; }
             set
@@ -85,7 +84,7 @@ namespace ProyectoFaltas.ViewModels
         }
 
         //Crear la lista de colores:
-        private List<ColorOption> _colorOptions = new List<ColorOption>
+        private ObservableCollection<ColorOption> _colorOptions = new ObservableCollection<ColorOption>
         {
             //Los que ya tenían
             new ColorOption { Name = "Verde", ColorValue = Colors.Green },
@@ -102,9 +101,9 @@ namespace ProyectoFaltas.ViewModels
         };
 
         //metodo para usar los colores:
-        public List<ColorOption> ColorOptions
+        public ObservableCollection<ColorOption> ColorOptions
         {
-            get { return _colorOptions; }
+            get => _colorOptions;
             set
             {
                 _colorOptions = value;
@@ -117,17 +116,17 @@ namespace ProyectoFaltas.ViewModels
         public async void AddElement()
         {
             // Validaciones por precaución y evitar nulos
-            if (!string.IsNullOrEmpty(_TipoIntro) && !string.IsNullOrEmpty(_selectedColor))
+            if (!string.IsNullOrEmpty(TipoIntro) && SelectedColor != null)
             {
                 TipoFalta item = new TipoFalta
                 {
-                    Tipo = _TipoIntro,
-                    Color = _selectedColor,
+                    Tipo = TipoIntro,
+                    Color = SelectedColor.Name, // Usar el nombre del color
                 };
 
                 // Limpiar campos
                 TipoIntro = "";
-                SelectedColor = "";
+                SelectedColor = null;
 
                 // Insertar en la base de datos
                 await TipoFaltaDB.AddTipoFaltaAsync(item);

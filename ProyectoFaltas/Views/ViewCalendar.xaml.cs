@@ -103,7 +103,7 @@ namespace ProyectoFaltas.Views
 
         private async void recargarLista()
         {
-            ListaFaltas = database.GetFaltasAsync();
+            //ListaFaltas = database.GetFaltasAsync();
         }
     }
 }
