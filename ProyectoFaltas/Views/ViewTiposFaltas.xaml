@@ -5,12 +5,14 @@
              BackgroundColor="{StaticResource Gray200}">
 
 
-    <Grid ColumnDefinitions="1*,*" ColumnSpacing="20" Padding="20">
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Padding="20">
 
-        <Grid Grid.Column="0" RowDefinitions="*, *" RowSpacing="20">
+        <Grid Grid.Column="0" RowDefinitions="1.5*, *" RowSpacing="20">
+
+            <!-- .............................MOSTRAR LAS FALTAS............................. -->
             <Frame  CornerRadius="10" Grid.Row="0">
                 <Grid RowDefinitions="auto,*" RowSpacing="10">
-                    <Grid Grid.Column="0">
+                    <Grid Grid.Row="0">
                         <Label Text="Tipos de faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
                         <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
                                      HeightRequest="10"
@@ -22,10 +24,11 @@
                 </Grid>
             </Frame>
 
+            <!-- .............................CREAR LAS FALTAS............................. -->
             <Frame  CornerRadius="10" Grid.Row="1">
                 <Grid RowDefinitions="auto,*" RowSpacing="10">
-                    <Grid Grid.Column="0">
-                        <Label Text="Modificar las faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+                    <Grid Grid.Row="0">
+                        <Label Text="Crear las faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
                         <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
                                      HeightRequest="10"
                                      WidthRequest="10"
@@ -33,11 +36,26 @@
                                      Command="{Binding IconoAyudaEditarDatosCommand}"/>
                     </Grid>
 
+                    <ScrollView  Grid.Row="1">
+                        <Grid RowDefinitions="auto,auto,auto,auto" RowSpacing="10">
+                            <Label Grid.Row="0"></Label>
+                            <Entry Grid.Row="1"></Entry>
+                            <Label Grid.Row="2"></Label>
+                            <Picker Grid.Row="3" Title="Selecciona un color"/>
+                            <!-- ItemsSource="{Binding ColorOptions}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedColorOption}"
+                            HorizontalOptions="FillAndExpand"-->
+
+                        </Grid>
+                    </ScrollView>
                 </Grid>
             </Frame>
         </Grid>
 
 
-        <Image Grid.Column="1"  Source="serraperenxisa.png" Aspect="Center"/>
+        <Grid Grid.Column="1">
+            <Image Source="serraperenxisa.png" Aspect="Center"/>
+        </Grid>
     </Grid>
 </ContentPage>
