@@ -20,6 +20,14 @@
 
         <Image Source="serraperenxisa.png" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" Aspect="AspectFit"/>
 
+        <!--CUANDO NO TIENES DIA SELECCIONADO-->
+        <Frame Grid.Column="1" Grid.RowSpan="2">
+
+            <Button x:Name="AddEventInThisDay" Text="Añadir faltas a este día" HorizontalOptions="Start" VerticalOptions="Start" Clicked="AddEventInThisDay_Clicked"/>
+
+        </Frame>
+
+        <!--CUANDO CLICAS EN UN DIA SIN EVENTO-->
         <Frame Grid.Column="1" Grid.RowSpan="2" IsVisible="{Binding IsEventSelected}">
             <!-- View for displaying selected event details -->
             <CollectionView>

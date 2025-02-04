@@ -27,6 +27,18 @@ namespace ProyectoFaltas.Views
             }
         }
 
+        private DateTime _selectedDay;
+
+        public DateTime SelectedDay
+        {
+            get => _selectedDay;
+            set
+            {
+                _selectedDay = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand DayTappedCommand { get; }
 
         public ViewCalendar()
@@ -45,7 +57,7 @@ namespace ProyectoFaltas.Views
         {
             // Filtrar eventos según la fecha seleccionada
             SelectedEvent = Events.FirstOrDefault(evento => evento.Date.Date == selectedDate);
-
+            SelectedDay = selectedDate;
             // Si no hay evento en esa fecha, se puede limpiar el evento seleccionado
             if (SelectedEvent == null)
             {
@@ -69,8 +81,11 @@ namespace ProyectoFaltas.Views
             public DateTime Date { get; set; } // Nueva propiedad Date
         }
 
-        
-
+        private void AddEventInThisDay_Clicked(object sender, EventArgs e)
+        {
+            DateTime fechaActual = DateTime.Now;
+            Events.Add(new Event { Date = fechaActual });
+        }
     }
 }
 
