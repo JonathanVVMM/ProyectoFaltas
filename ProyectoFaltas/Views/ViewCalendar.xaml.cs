@@ -110,8 +110,6 @@ namespace ProyectoFaltas.Views
                 }
             }
 
-
-
         }
     }
 }
