@@ -100,7 +100,18 @@ namespace ProyectoFaltas.Views
 
         private async void recargarLista()
         {
-            ListaFaltas = database.GetFaltasAsync();
+            if (Curso.CursoActual != null)
+            {
+                ListaFaltas = new ObservableCollection<Falta>(await database.GetFaltasAsync(Curso.CursoActual.Id));
+                Events = new ObservableCollection<Event>();
+                foreach (Falta item in ListaFaltas)
+                {
+                    Events.Add(new Event { Date = item.Fecha });
+                }
+            }
+
+
+
         }
     }
 }
