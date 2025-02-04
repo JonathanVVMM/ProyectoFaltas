@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CoreFoundation.DispatchSource;
 
 namespace ProyectoFaltas.Database
 {
@@ -30,7 +31,10 @@ namespace ProyectoFaltas.Database
         public async Task<int> AddActivoAsync(Activo activo)
         {
             await Init();
-            return await Database.InsertAsync(activo);
+            if (activo.Id != 0)
+                return await Database.UpdateAsync(activo);
+            else
+                return await Database.InsertAsync(activo);
         }
         public async Task<List<Activo>> GetActivosAsync()
         {
@@ -68,7 +72,10 @@ namespace ProyectoFaltas.Database
         public async Task<int> AddCursoAsync(Curso curso)
         {
             await Init();
-            return await Database.InsertAsync(curso);
+            if (curso.Id != 0)
+                return await Database.UpdateAsync(curso);
+            else
+                return await Database.InsertAsync(curso);
         }
 
         // Lista los cursos existentes
@@ -96,7 +103,10 @@ namespace ProyectoFaltas.Database
         public async Task<int> AddFaltaAsync(Falta falta)
         {
             await Init();
-            return await Database.InsertAsync(falta);
+            if (falta.Id != 0)
+                return await Database.UpdateAsync(falta);
+            else
+                return await Database.InsertAsync(falta);
         }
 
         // Devuelve las faltas generadas en un curso
@@ -129,7 +139,10 @@ namespace ProyectoFaltas.Database
         public async Task<int> AddTipoFaltaAsync(TipoFalta tipoFalta)
         {
             await Init();
-            return await Database.InsertAsync(tipoFalta);
+            if (tipoFalta.Id != 0)
+                return await Database.UpdateAsync(tipoFalta);
+            else
+                return await Database.InsertAsync(tipoFalta);
         }
 
         public async Task<List<TipoFalta>> GetTipoFaltasAsync()
