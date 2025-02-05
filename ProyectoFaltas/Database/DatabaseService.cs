@@ -143,7 +143,7 @@ namespace ProyectoFaltas.Database
         }
 
         // -------------------------- TABLA TIPOFALTA -------------------------- 
-        public async Task<int> AddTipoFaltaAsync(TipoFalta tipoFalta)
+        public async Task<int> SaveTipoFaltaAsync(TipoFalta tipoFalta)
         {
             await Init();
             if (tipoFalta.Id != 0)

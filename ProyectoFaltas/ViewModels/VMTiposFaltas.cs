@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.Maui.Graphics;
+using System.Globalization;
 
 namespace ProyectoFaltas.ViewModels
 {
@@ -39,7 +40,9 @@ namespace ProyectoFaltas.ViewModels
 
         //---------------------------------------------------------- ICommand ----------------------------------------------------------
         public ICommand AddElementCommand { get; set; }
-        public ICommand RemoveElementCommand { get; set; }
+        public ICommand ModifyTipoFaltaCommand { get; set; }
+        public ICommand ActualizarTipoFaltaCommand { get; set; }
+        public ICommand CancelarActualizarTipoFaltaCommand { get; set; }
 
 
         //---------------------------------------------------------- METODO PRINCIPAL ----------------------------------------------------------
@@ -47,6 +50,9 @@ namespace ProyectoFaltas.ViewModels
         {
             RecuperarTiposFaltas();
             AddElementCommand = new Command(AddElement);
+            ModifyTipoFaltaCommand = new Command<int>(ModifyTipoFalta);
+            ActualizarTipoFaltaCommand = new Command(ActualizarTipoFalta);
+            CancelarActualizarTipoFaltaCommand = new Command(CancelarActualizarTipoFalta);
         }
 
         //---------------------------------------------------------- INTRODUCIDOS USUARIO ----------------------------------------------------------
@@ -70,6 +76,50 @@ namespace ProyectoFaltas.ViewModels
             set
             {
                 _selectedColor = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //---------------------------------------------------------- EDITADOS USUARIO ----------------------------------------------------------
+        // Tipo
+        private string _TipoNuevo = "";
+        public string TipoNuevo
+        {
+            get { return _TipoNuevo; }
+            set
+            {
+                _TipoNuevo = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Color
+        private ColorOption _selectedColorNuevo;
+        public ColorOption SelectedColorNuevo
+        {
+            get { return _selectedColorNuevo; }
+            set
+            {
+                _selectedColorNuevo = value;
+                OnPropertyChanged();
+            }
+        }
+
+        //---------------------------------------------------------- PARA LOS METODOS ----------------------------------------------------------
+        private TipoFalta _TipoFaltaEditando;
+        public TipoFalta TipoFaltaEditando
+        {
+            get { return _TipoFaltaEditando; }
+            set { _TipoFaltaEditando = value; OnPropertyChanged(); }
+        }
+
+        private bool _editando = false;
+        public bool Editando
+        {
+            get { return _editando; }
+            set
+            {
+                _editando = value;
                 OnPropertyChanged();
             }
         }
@@ -115,7 +165,6 @@ namespace ProyectoFaltas.ViewModels
         //---------------------------------------------------------- AddElement ----------------------------------------------------------
         public async void AddElement()
         {
-            // Validaciones por precaución y evitar nulos
             if (!string.IsNullOrEmpty(TipoIntro) && SelectedColor != null)
             {
                 TipoFalta item = new TipoFalta
@@ -124,20 +173,64 @@ namespace ProyectoFaltas.ViewModels
                     Color = SelectedColor.Name, // Usar el nombre del color
                 };
 
-                // Limpiar campos
                 TipoIntro = "";
-                SelectedColor = null;
+                SelectedColor = null; // Restablecer los valores después de agregar el nuevo item
 
-                // Insertar en la base de datos
-                await TipoFaltaDB.AddTipoFaltaAsync(item);
+                await TipoFaltaDB.SaveTipoFaltaAsync(item);
 
-                // Recuperar lista actualizada
                 RecuperarTiposFaltas();
             }
         }
 
-        //---------------------------------------------------------- RemoveElement ----------------------------------------------------------
 
+        //---------------------------------------------------------- ModifyTipoFalta ----------------------------------------------------------
+        public async void ModifyTipoFalta(int ItemId)
+        {
+
+            TipoFaltaEditando = MisTiposFalta.FirstOrDefault(p => p.Id == ItemId);
+            if (TipoFaltaEditando != null)
+            {
+                TipoNuevo = TipoFaltaEditando.Tipo;
+                SelectedColorNuevo = ColorOptions.FirstOrDefault(c => c.Name == TipoFaltaEditando.Color); // Establecer el color del picker
+                Editando = true;
+
+            }
+        }
+
+
+        //---------------------------------------------------------- ActualizarTipoFalta ----------------------------------------------------------
+        public async void ActualizarTipoFalta()
+        {
+            if (await App.Current.MainPage.DisplayAlert("Actualizar Tipo falta", "Está seguro de actualizar el tipo de falta seleccionado?", "Confirmar", "Cancelar"))
+            {
+                if (!String.IsNullOrEmpty(TipoNuevo))
+                {
+                    TipoFaltaEditando.Tipo = TipoNuevo;
+                }
+
+                if (!String.IsNullOrEmpty(TipoNuevo))
+                {
+                    TipoFaltaEditando.Color = SelectedColorNuevo.Name;
+                }
+
+                await TipoFaltaDB.SaveTipoFaltaAsync(TipoFaltaEditando);
+                Editando = false;
+                TipoFaltaEditando = null;
+                TipoNuevo = ""; SelectedColorNuevo = null;
+                RecuperarTiposFaltas();
+            }
+        }
+
+        //---------------------------------------------------------- CancelarActualizarTipoFalta ----------------------------------------------------------
+        public async void CancelarActualizarTipoFalta()
+        {
+            if (await App.Current.MainPage.DisplayAlert("Cancelación de Actualización", "Está seguro de cancelar la actualización del tipo de falta?", "Confirmar", "Cancelar"))
+            {
+                TipoFaltaEditando = null;
+                Editando = false;
+                TipoNuevo = ""; SelectedColorNuevo = null;
+            }
+        }
 
         //---------------------------------------------------------- RecuperarTiposFaltas ----------------------------------------------------------
         private async void RecuperarTiposFaltas()

@@ -2,8 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ProyectoFaltas.ViewModels"
+             xmlns:vmet="clr-namespace:ProyectoFaltas.Metodos"
              x:Class="ProyectoFaltas.Views.ViewTiposFaltas"
              BackgroundColor="{StaticResource Gray200}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vmet:HexColorConverter x:Key="HexColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <vm:VMTiposFaltas/>
@@ -11,10 +18,10 @@
 
     <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Padding="20">
 
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" RowDefinitions="1*,auto">
 
             <!-- .............................MOSTRAR LAS FALTAS............................. -->
-            <Frame  CornerRadius="10" Grid.Row="0">
+            <Frame CornerRadius="10" Grid.Row="0">
                 <Grid RowDefinitions="auto,*" RowSpacing="10">
                     <Grid Grid.Row="0">
                         <Label Text="Tipos de faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
@@ -27,58 +34,46 @@
 
                     <ScrollView Grid.Row="1">
                         <VerticalStackLayout Spacing="5">
-                            <CollectionView x:Name="MiListaEditable" ItemsSource="{Binding ListaProfesores, Mode=TwoWay}" SelectionMode="None">
-
-                                <CollectionView.ItemsLayout>
-                                    <GridItemsLayout Orientation="Vertical" Span="3"
-                                                     VerticalItemSpacing="5" HorizontalItemSpacing="5"/>
-                                </CollectionView.ItemsLayout>
-
+                            <!-- Lista de Tipos de Faltas -->
+                            <CollectionView Grid.Row="1" Grid.ColumnSpan="2" x:Name="MiListaEditable2" ItemsSource="{Binding MisTiposFalta, Mode=TwoWay}" SelectionMode="None">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Frame CornerRadius="0" Padding="10" Margin="0" HasShadow="False">
-                                            <Grid RowDefinitions="AUTO,AUTO,AUTO,AUTO,AUTO">
+                                        <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="10">
+                                            <Grid ColumnDefinitions="*, Auto">
+                                                <StackLayout Orientation="Horizontal" Spacing="10">
 
-                                                <HorizontalStackLayout Grid.Row="0" Spacing="10">
-                                                    <Label Text="Nombre:"/>
-                                                    <Label Text="{Binding Nombre}"/>
-                                                </HorizontalStackLayout>
-
-                                                <HorizontalStackLayout Grid.Row="1" Spacing="10">
-                                                    <Label Text="Apellidos: "/>
-                                                    <Label Text="{Binding Apellidos}"/>
-                                                </HorizontalStackLayout>
+                                                    <BoxView WidthRequest="20" HeightRequest="20" Color="{Binding Color, Converter={StaticResource HexColorConverter}}" CornerRadius="10"/>
 
 
-                                                <Grid ColumnDefinitions="auto,*" Grid.Row="2">
-                                                    <ImageButton Source="editar.png"
-                                                                 Grid.Column="0" HorizontalOptions="Center" Aspect="AspectFit"
-                                                                 HeightRequest="40"
-                                                                 WidthRequest="40"
-                                                                 BackgroundColor="Transparent"
-                                                                 Command="{Binding Source={x:Reference MiListaEditable}, Path=BindingContext.ModifyProfesorCommand}"
-                                                                 CommandParameter="{Binding Id}"/>
-                                                </Grid>
+                                                    <Label Text="{Binding Tipo}" FontSize="18" VerticalOptions="Center"/>
+                                                </StackLayout>
+                                                <Button Text="Editar"
+                                                        Command="{Binding BindingContext.ModifyTipoFaltaCommand, Source={x:Reference MiListaEditable2}}"
+                                                        CommandParameter="{Binding Id}"
+                                                        Grid.Column="1" />
+
+
 
 
                                             </Grid>
                                         </Frame>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
-
                             </CollectionView>
                         </VerticalStackLayout>
                     </ScrollView>
                 </Grid>
             </Frame>
+
+            <Image Grid.Row="1" Source="serraperenxisa.png" Aspect="Center"/>
         </Grid>
 
 
         <Grid Grid.Column="1">
-            <Grid RowDefinitions="*,auto">
+            <Grid RowDefinitions="*,*" RowSpacing="30">
                 <!-- .............................CREAR LAS FALTAS............................. -->
                 <Frame  CornerRadius="10" Grid.Row="0">
-                    <Grid RowDefinitions="auto,*" RowSpacing="10">
+                    <Grid RowDefinitions="auto,auto,auto" RowSpacing="15">
                         <Grid Grid.Row="0">
                             <Label Text="Crear las faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
                             <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit" HeightRequest="10" WidthRequest="10" BackgroundColor="Transparent" IsEnabled="True" Command="{Binding IconoAyudaEditarDatosCommand}"/>
@@ -87,15 +82,39 @@
                         <ScrollView  Grid.Row="1">
                             <Grid RowDefinitions="auto,auto,auto,auto" RowSpacing="10">
                                 <Label Grid.Row="0" Text="Introduce el tipo de la falta"></Label>
-                                <Entry Grid.Row="1"></Entry>
+                                <Entry Grid.Row="1" Text="{Binding TipoIntro, Mode=TwoWay}"/>
                                 <Label Grid.Row="2" Text="Selecciona el color de la falta"></Label>
                                 <Picker Grid.Row="3" ItemsSource="{Binding ColorOptions}" SelectedItem="{Binding SelectedColor, Mode=TwoWay}" ItemDisplayBinding="{Binding Name}" HorizontalOptions="FillAndExpand"/>
                             </Grid>
                         </ScrollView>
+
+                        <Button Grid.Row="2" Text="Añadir a la lista" HorizontalOptions="Center" Command="{Binding AddElementCommand}"/>
                     </Grid>
                 </Frame>
 
-                <Image Grid.Row="1" Source="serraperenxisa.png" Aspect="Center"/>
+                <!-- .............................MODIFICAR LAS FALTAS............................. -->
+                <Frame  CornerRadius="10" Grid.Row="1" IsVisible="{Binding Editando}">
+                    <Grid RowDefinitions="auto,auto,auto" RowSpacing="15">
+                        <Grid Grid.Row="0">
+                            <Label Text="Modificar las faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+                            <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit" HeightRequest="10" WidthRequest="10" BackgroundColor="Transparent" IsEnabled="True" Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                        </Grid>
+
+                        <ScrollView  Grid.Row="1">
+                            <Grid RowDefinitions="auto,auto,auto,auto" RowSpacing="10">
+                                <Label Grid.Row="0" Text="Introduce el tipo de la falta"></Label>
+                                <Entry Grid.Row="1" Text="{Binding TipoNuevo, Mode=TwoWay}" />
+                                <Label Grid.Row="2" Text="Selecciona el color de la falta"></Label>
+                                <Picker Grid.Row="3" ItemsSource="{Binding ColorOptions}" SelectedItem="{Binding SelectedColorNuevo, Mode=TwoWay}" ItemDisplayBinding="{Binding Name}" HorizontalOptions="FillAndExpand" />
+                            </Grid>
+                        </ScrollView>
+
+                        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                            <Button Text="Guardar" Command="{Binding ActualizarTipoFaltaCommand}"/>
+                            <Button Text="Cancelar" Command="{Binding CancelarActualizarTipoFaltaCommand}"/>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
             </Grid>
         </Grid>
     </Grid>

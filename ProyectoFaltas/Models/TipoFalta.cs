@@ -10,10 +10,11 @@ namespace ProyectoFaltas.Models
     public class TipoFalta
     {
         [PrimaryKey, AutoIncrement]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public string Tipo { get; set; } // VARCHAR(100)
 
         public string Color { get; set; } // VARCHAR(30)
+
     }
 }
