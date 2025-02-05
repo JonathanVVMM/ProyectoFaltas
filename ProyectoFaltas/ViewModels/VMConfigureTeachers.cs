@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -52,7 +53,7 @@ namespace ProyectoFaltas.ViewModels
             IconoAyudaEditarDatosCommand = new Command(IconoAyudaEditarDatos);
             IconoAyudaListaDatosCommand = new Command(IconoAyudaListaDatos);
 
-            recargarLista();
+            recargarEstadoProfesores();
 
         }
 
@@ -197,6 +198,23 @@ namespace ProyectoFaltas.ViewModels
         public ICommand ActualizarProfesorCommand { get; set; }
         public ICommand CancelarActualizarProfesorCommand { get; set; }
 
+        private async void recargarEstadoProfesores()
+        {
+            ListaProfesores = new ObservableCollection<Profesor>(await database.GetProfesoresAsync());
+            ObservableCollection<Profesor> ListaActivos = new ObservableCollection<Profesor>(await database.GetProfesoresActivosPorCursoAsync(Curso.CursoActual.Id));
+            foreach (var item in ListaProfesores)
+            {
+                int cont = 0;
+                foreach (var item2 in ListaActivos)
+                {
+                    if(item.Id == item2.Id) { item.Estado = "Activo"; cont+=1;}
+                }
+                if(cont == 0) { item.Estado = "Inactivo"; }
+                await database.SaveProfesorAsync(item);
+            }
+            recargarLista();
+        }
+
         private async void recargarLista()
         {
             ListaProfesores = new ObservableCollection<Profesor>(await database.GetProfesoresAsync());
@@ -214,6 +232,15 @@ namespace ProyectoFaltas.ViewModels
                 Apellidos = ""; Nombre = "";
 
                 await database.SaveProfesorAsync(prof);
+
+                if (prof.Estado == "Activo")
+                {
+                    var activoNuevo = new Activo();
+                    activoNuevo.IdCursos = Curso.CursoActual.Id;
+                    activoNuevo.IdProfesores = prof.Id;
+                    await database.AddActivoAsync(activoNuevo);
+                }
+
                 recargarLista();
             }
         }
@@ -228,6 +255,8 @@ namespace ProyectoFaltas.ViewModels
                 ProfesorEditando = null;
                 Editando = false;
                 await database.DeleteProfesorAsync(p);
+                await database.DeleteActivosAsync(ItemId);
+
                 recargarLista();
 
 
@@ -250,14 +279,35 @@ namespace ProyectoFaltas.ViewModels
         {
             if (await App.Current.MainPage.DisplayAlert("Actualizar Profesor", "Está seguro de actualizar el profesor seleccionado?", "Confirmar", "Cancelar"))
             {
+                var cambiarActivo = false;
                 if (!String.IsNullOrEmpty(NombreNuevo)) ProfesorEditando.Nombre = NombreNuevo;
                 if (!String.IsNullOrEmpty(ApellidosNuevo)) ProfesorEditando.Apellidos = ApellidosNuevo;
                 if (!String.IsNullOrEmpty(TipoNuevo)) ProfesorEditando.Tipo = TipoNuevo;
-                if (!String.IsNullOrEmpty(EstadoNuevo)) ProfesorEditando.Estado = EstadoNuevo;
+                if (!String.IsNullOrEmpty(EstadoNuevo) && ProfesorEditando.Estado != EstadoNuevo)
+                {
+                    ProfesorEditando.Estado = EstadoNuevo;
+                    cambiarActivo = true;
+                }
                 await database.SaveProfesorAsync(ProfesorEditando);
+
+                if (cambiarActivo)
+                {
+                    if(EstadoNuevo == "Activo")
+                    {
+                        var activoNuevo = new Activo();
+                        activoNuevo.IdCursos = Curso.CursoActual.Id;
+                        activoNuevo.IdProfesores = ProfesorEditando.Id;
+                        await database.AddActivoAsync(activoNuevo);
+                    } else
+                    {
+                        await database.DeleteActivoAsync(ProfesorEditando.Id, Curso.CursoActual.Id);
+                    }
+                }
+                
                 Editando = false;
                 ProfesorEditando = null;
                 NombreNuevo = ""; ApellidosNuevo = ""; TipoNuevo = ""; EstadoNuevo = "";
+                
                 recargarLista();
             }
         }

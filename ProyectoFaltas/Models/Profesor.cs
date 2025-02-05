@@ -21,7 +21,7 @@ namespace ProyectoFaltas.Models
         public string Nombre { get; set; }
         public string Apellidos { get; set; }
         public string Tipo { get; set; }
-        public string Estado { get; set; }
+        public string Estado { get; set; } // Activo / Inactivo   Esto es un dato para ayudar a la inserción
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
