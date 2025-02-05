@@ -240,7 +240,6 @@ namespace ProyectoFaltas.Database
             }
             else
             {
-
                 return await Database.InsertAsync(profesor);
             }
 
