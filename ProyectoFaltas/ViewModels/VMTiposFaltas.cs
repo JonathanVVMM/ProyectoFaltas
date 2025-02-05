@@ -237,5 +237,8 @@ namespace ProyectoFaltas.ViewModels
         {
             MisTiposFalta = new ObservableCollection<TipoFalta>(await TipoFaltaDB.GetTipoFaltasAsync());
         }
+
+        //---------------------------------------------------------- BOTONES AYUDA ----------------------------------------------------------
+
     }
 }

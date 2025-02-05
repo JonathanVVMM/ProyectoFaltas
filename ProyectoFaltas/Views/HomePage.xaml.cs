@@ -83,4 +83,16 @@ public partial class HomePage : ContentPage, INotifyPropertyChanged
     {
         await Shell.Current.GoToAsync("//ViewTiposFaltas");
     }
+
+    private async void Ayuda_Clicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Información de ayuda",
+                            "Bienvenido a la página principal:\n\n" +
+                             "- Puedes seleccionar un curso desde el selector desplegable y utilizar las opciones disponibles.\n" +
+                             "- Tienes accesos directos para gestionar el calendario, crear profesores, editar profesores y editar tipos de faltas. Estos botones estarán habilitados únicamente si seleccionas un curso.\n" +
+                             "- Usa el botón 'Crear curso' si necesitas agregar un nuevo curso a la lista.\n\n" +
+                             "Recuerda que cada sección tiene un propósito específico para organizar mejor la información y facilitar la navegación.",
+                             "Entendido");
+
+    }
 }

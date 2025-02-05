@@ -55,4 +55,9 @@ public partial class viewCreateYear : ContentPage
         await _databaseService.AddCursoAsync(nuevoCurso);
         await SeleccionarCursoAsync(nuevoCurso.Id);
     }
+
+    private async void Volver_HomePage_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//HomePage");
+    }
 }

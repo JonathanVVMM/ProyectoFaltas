@@ -8,25 +8,26 @@
 
         <Frame Grid.Column="0" CornerRadius="10">
 
-            <Grid RowDefinitions="auto,*" RowSpacing="10">
-                <Grid>
-                    <Label Text="Bienvenidos" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
-                    <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
-                                 HeightRequest="10"
-                                 WidthRequest="10"
-                                 BackgroundColor="Transparent" IsEnabled="True"
-                                 Command="{Binding IconoAyudaEditarDatosCommand}"/>
+            <Grid RowDefinitions="3*,*">
+                <Grid Grid.Row="0" RowDefinitions="auto,*" RowSpacing="10">
+                    <Grid>
+                        <Label Text="Bienvenido a crear curso" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+                        <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
+                                     HeightRequest="10"
+                                     WidthRequest="10"
+                                     BackgroundColor="Transparent" IsEnabled="True"
+                                     Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                    </Grid>
+
+                    <ScrollView Grid.Row="1">
+                        <Grid ColumnDefinitions="*,auto" RowDefinitions="auto,auto,auto,auto,auto" RowSpacing="10">
+                            <Entry x:Name="eNombreCurso" Text="{Binding Nombre, Mode=TwoWay}" Placeholder="2024/2025"/>
+                            <Button Text="Crear curso" Grid.Row="1" Clicked="Button_Clicked"></Button>
+                        </Grid>
+                    </ScrollView>
                 </Grid>
 
-                <ScrollView Grid.Row="1">
-                    <Grid ColumnDefinitions="*,auto" RowDefinitions="auto,auto,auto,auto,auto" RowSpacing="10">
-                        <Entry x:Name="eNombreCurso" Text="{Binding Nombre, Mode=TwoWay}"/>
-                        <Button Text="crear Curso" Grid.Row="1"
-                                Clicked="Button_Clicked">
-
-                        </Button>
-                    </Grid>
-                </ScrollView>
+                <Button Text="Volver a la pagina de inicio" Grid.Row="1" x:Name="Volver_HomePage" Clicked="Volver_HomePage_Clicked" BackgroundColor="#2F593A" VerticalOptions="End" HorizontalOptions="CenterAndExpand"></Button>
             </Grid>
         </Frame>
 

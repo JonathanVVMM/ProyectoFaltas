@@ -36,9 +36,14 @@
                         <VerticalStackLayout Spacing="5">
                             <!-- Lista de Tipos de Faltas -->
                             <CollectionView Grid.Row="1" Grid.ColumnSpan="2" x:Name="MiListaEditable2" ItemsSource="{Binding MisTiposFalta, Mode=TwoWay}" SelectionMode="None">
+
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                                </CollectionView.ItemsLayout>
+
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="10">
+                                        <Frame Padding="10" Margin="5" BorderColor="Black" CornerRadius="10">
                                             <Grid ColumnDefinitions="*, Auto">
                                                 <StackLayout Orientation="Horizontal" Spacing="10">
 
