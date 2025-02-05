@@ -7,8 +7,8 @@
 
     <Grid ColumnDefinitions="*,2*" RowDefinitions="3*,*" Padding="20" ColumnSpacing="20">
         <Frame Grid.Column="0" VerticalOptions="Start">
-            <controls:Calendar Events="{Binding Events}" BackgroundColor="{StaticResource Gray100}"
-                               DayTappedCommand="{Binding DayTappedCommand}" DaysTitleColor="Black"
+            <controls:Calendar BackgroundColor="{StaticResource Gray100}"
+                               SelectedDate="{Binding SelectedDay}" DaysTitleColor="Black"
                                YearLabelColor="#2F593A" MonthLabelColor="#2F593A"
                                SelectedDayBackgroundColor="#2F593A" SelectedDateColor="#2F593A"
                                TodayOutlineColor="#2F593A" ArrowsBackgroundColor="#2F593A"
@@ -19,48 +19,47 @@
 
         <Image Source="serraperenxisa.png" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" Aspect="AspectFit"/>
 
-        <!-- CUANDO NO TIENES DIA SELECCIONADO -->
-        <Frame Grid.Column="1" Grid.RowSpan="2">
-            <Button x:Name="AddEventInThisDay" Text="Añadir faltas a este día" HorizontalOptions="Start" VerticalOptions="Start" Clicked="AddEventInThisDay_Clicked"/>
-        </Frame>
-
-        <!-- Formulario de selección de falta -->
-        <Frame Grid.Column="1" Grid.RowSpan="2" IsVisible="{Binding IsEventSelected}">
-            <!-- View for displaying selected event details -->
-            <CollectionView>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid RowDefinitions="*,*,*">
-                            <Label Grid.Row="0" Text="{Binding SelectedEvent.Name}" FontAttributes="Bold" FontSize="Large" />
-                            <Label Grid.Row="1" Text="{Binding SelectedEvent.Description}" FontSize="Medium" LineBreakMode="WordWrap" />
-                            <Label Grid.Row="2" Text="{Binding SelectedEvent.Date}" FontSize="Medium" LineBreakMode="WordWrap" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Frame>
-
-
         <!-- CUANDO CLICAS EN UN DIA CON EVENTO -->
-        <Frame Grid.Column="1" Grid.RowSpan="2" IsVisible="{Binding IsAddEventVisible}">
-            <Grid RowDefinitions="*,*,*" RowSpacing="10">
-                <StackLayout Grid.Row="0">
+        <Frame Grid.Column="1" Grid.RowSpan="2">
+
+            <Grid RowDefinitions="*,*,*" RowSpacing="10" ColumnDefinitions="*,*" ColumnSpacing="10">
+
+                <VerticalStackLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="Center">
+                    <HorizontalStackLayout Spacing="13">
+                        <Label Text="Faltas del dia" FontSize="Medium"/>
+                        <Label Text="{Binding SelectedDay}" FontSize="Medium"/>
+                    </HorizontalStackLayout>
+
+                    <CollectionView x:Name="ListaFaltaCalendario" ItemsSource="{Binding ListaFaltas, Mode=TwoWay}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="2*,*,*">
+                                    <Label Text="{Binding profesorNombreApellido}"/>
+                                    <Label Text="{Binding nombreTipoFalta}" Grid.Column="1"/>
+                                    <Label Text="{Binding UltimaModificacion}" Grid.Column="2"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="1">
                     <Label Text="Selecciona un profesor:" FontSize="Medium" />
-                    <Picker x:Name="ProfesorPicker" ItemsSource="{Binding Profesores}" ItemDisplayBinding="{Binding Name}" />
+                    <Picker x:Name="ProfesorPicker" ItemsSource="{Binding ListaProfesores}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ProfesorSeleccionado}" />
                 </StackLayout>
 
-                <StackLayout Grid.Row="1">
+                <StackLayout Grid.Row="1" Grid.Column="1">
                     <Label Text="Selecciona tipo de falta:" FontSize="Medium" />
-                    <Picker x:Name="TipoFaltaPicker" ItemsSource="{Binding TiposFalta}" ItemDisplayBinding="{Binding Name}" />
+                    <Picker x:Name="TipoFaltaPicker" ItemsSource="{Binding ListaTipoFaltas}" ItemDisplayBinding="{Binding Tipo}" SelectedItem="{Binding TipoFaltaSeleccionado}"/>
                 </StackLayout>
 
-                <StackLayout Grid.Row="2">
+                <StackLayout Grid.Row="2" Grid.Column="1">
                     <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                        <Button Grid.Column="0" Text="Añadir Evento" Clicked="AddEventWithDetails_Clicked"/>
-                        <Button Grid.Column="1" Text="Cancelar" Clicked="CancelAddEvent_Clicked"/>
+                        <Button x:Name="AddFalta" Grid.Column="0" Text="Añadir Falta" Clicked="AddFalta_Clicked"/>
                     </Grid>
                 </StackLayout>
             </Grid>
+
         </Frame>
     </Grid>
 

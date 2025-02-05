@@ -80,10 +80,7 @@ namespace ProyectoFaltas.Database
             {
                 await Database.DeleteAsync(activo);
             }
-
         }
-
-
 
         //Obetener el ultimo curso
         public async Task<int?> GetUltimoAnoCursoAsync()
@@ -172,6 +169,40 @@ namespace ProyectoFaltas.Database
         {
             await Init();
             return await Database.DeleteAsync(falta);
+        }
+
+        // Devuelve las faltas de un dia en especifico agregando los datos de nombre y apellido de Profesor y y nombre de tipoFalta
+
+        public async Task<List<Falta>> GetFaltasDatosPorDiaAsync(DateTime fecha)
+        {
+            await Init();
+
+            //Obtiene las faltas por fecha
+            var faltas = await Database.Table<Falta>().Where(i => i.Fecha == fecha).ToListAsync();
+
+            var listaFaltas = new List<Falta>();
+
+            foreach (var falta in faltas)
+            {
+                // Obtener el profesor asociado a esta falta
+                var profesor = await Database.Table<Profesor>().Where(p => p.Id == falta.IdProfesores).FirstOrDefaultAsync();
+
+                // Obtener el tipo de falta asociado a esta falta
+                var tipoFalta = await Database.Table<TipoFalta>().Where(tf => tf.Id == falta.IdTipoFalta).FirstOrDefaultAsync();
+
+                // Crear un nuevo objeto Falta con los datos completos
+                listaFaltas.Add(new Falta
+                {
+                    Id = falta.Id,
+                    IdProfesores = falta.IdProfesores,
+                    IdTipoFalta = falta.IdTipoFalta,
+                    Fecha = falta.Fecha,
+                    profesorNombreApellido = profesor != null ? profesor.Nombre + " " + profesor.Apellidos : "",
+                    nombreTipoFalta = tipoFalta != null ? tipoFalta.Tipo : ""
+                });
+            }
+
+            return listaFaltas;
         }
 
 

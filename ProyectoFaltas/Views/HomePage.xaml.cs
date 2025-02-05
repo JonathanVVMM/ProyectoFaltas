@@ -13,8 +13,13 @@ public partial class HomePage : ContentPage, INotifyPropertyChanged
     public HomePage()
     {
         InitializeComponent();
-        cargarCursos();
         BindingContext = this;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        cargarCursos();
     }
 
     public bool CursoSeleccionado => CursoBindeado != null;
