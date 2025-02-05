@@ -14,20 +14,17 @@
                                TodayOutlineColor="#2F593A" ArrowsBackgroundColor="#2F593A"
                                ArrowsBorderColor="White" ArrowsColor="White"
                                FooterArrowVisible="False" FooterSectionVisible="False">
-
             </controls:Calendar>
         </Frame>
 
         <Image Source="serraperenxisa.png" Grid.Column="0" Grid.Row="1" VerticalOptions="Center" Aspect="AspectFit"/>
 
-        <!--CUANDO NO TIENES DIA SELECCIONADO-->
+        <!-- CUANDO NO TIENES DIA SELECCIONADO -->
         <Frame Grid.Column="1" Grid.RowSpan="2">
-
             <Button x:Name="AddEventInThisDay" Text="Añadir faltas a este día" HorizontalOptions="Start" VerticalOptions="Start" Clicked="AddEventInThisDay_Clicked"/>
-
         </Frame>
 
-        <!--CUANDO CLICAS EN UN DIA SIN EVENTO-->
+        <!-- Formulario de selección de falta -->
         <Frame Grid.Column="1" Grid.RowSpan="2" IsVisible="{Binding IsEventSelected}">
             <!-- View for displaying selected event details -->
             <CollectionView>
@@ -41,6 +38,29 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+        </Frame>
+
+
+        <!-- CUANDO CLICAS EN UN DIA CON EVENTO -->
+        <Frame Grid.Column="1" Grid.RowSpan="2" IsVisible="{Binding IsAddEventVisible}">
+            <Grid RowDefinitions="*,*,*" RowSpacing="10">
+                <StackLayout Grid.Row="0">
+                    <Label Text="Selecciona un profesor:" FontSize="Medium" />
+                    <Picker x:Name="ProfesorPicker" ItemsSource="{Binding Profesores}" ItemDisplayBinding="{Binding Name}" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="1">
+                    <Label Text="Selecciona tipo de falta:" FontSize="Medium" />
+                    <Picker x:Name="TipoFaltaPicker" ItemsSource="{Binding TiposFalta}" ItemDisplayBinding="{Binding Name}" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="2">
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Grid.Column="0" Text="Añadir Evento" Clicked="AddEventWithDetails_Clicked"/>
+                        <Button Grid.Column="1" Text="Cancelar" Clicked="CancelAddEvent_Clicked"/>
+                    </Grid>
+                </StackLayout>
+            </Grid>
         </Frame>
     </Grid>
 

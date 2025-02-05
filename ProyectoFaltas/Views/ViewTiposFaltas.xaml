@@ -47,14 +47,7 @@
 
                                                     <Label Text="{Binding Tipo}" FontSize="18" VerticalOptions="Center"/>
                                                 </StackLayout>
-                                                <Button Text="Editar"
-                                                        Command="{Binding BindingContext.ModifyTipoFaltaCommand, Source={x:Reference MiListaEditable2}}"
-                                                        CommandParameter="{Binding Id}"
-                                                        Grid.Column="1" />
-
-
-
-
+                                                <Button Text="Editar" Command="{Binding BindingContext.ModifyTipoFaltaCommand, Source={x:Reference MiListaEditable2}}" CommandParameter="{Binding Id}" Grid.Column="1" />
                                             </Grid>
                                         </Frame>
                                     </DataTemplate>

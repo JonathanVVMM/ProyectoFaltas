@@ -18,5 +18,7 @@ namespace ProyectoFaltas.Models
 
         [Indexed]
         public int IdProfesores { get; set; }
+
+
     }
 }

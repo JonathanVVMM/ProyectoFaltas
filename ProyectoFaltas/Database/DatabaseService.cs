@@ -75,12 +75,12 @@ namespace ProyectoFaltas.Database
             var registrosActivos = await Database.Table<Activo>()
                                                  .Where(a => a.IdProfesores == idProfesor)
                                                  .ToListAsync();
-            
+
             foreach (var activo in registrosActivos)
             {
                 await Database.DeleteAsync(activo);
             }
-            
+
         }
 
 
@@ -263,6 +263,22 @@ namespace ProyectoFaltas.Database
             await Init();
             return await Database.DeleteAsync(profesor);
         }
+
+        public async Task<List<Profesor>> GetProfesoresByFaltaAsync(int faltaId)
+        {
+            await Init();
+
+            // Obtener los activos asociados a la falta
+            var activos = await Database.Table<Activo>().Where(a => a.IdFalta == faltaId).ToListAsync();
+
+            // Obtener los IDs de los profesores asociados a la falta
+            var profesoresIds = activos.Select(a => a.IdProfesores).ToList();
+
+            // Obtener los profesores que corresponden a esos IDs
+            return await Database.Table<Profesor>().Where(p => profesoresIds.Contains(p.Id)).ToListAsync();
+        }
+
+
 
     }
 }
