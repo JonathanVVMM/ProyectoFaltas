@@ -269,7 +269,7 @@ namespace ProyectoFaltas.Database
             await Init();
 
             // Obtener los activos asociados a la falta
-            var activos = await Database.Table<Activo>().Where(a => a.IdFalta == faltaId).ToListAsync();
+            var activos = await Database.Table<Activo>().Where(a => a.Id == faltaId).ToListAsync();
 
             // Obtener los IDs de los profesores asociados a la falta
             var profesoresIds = activos.Select(a => a.IdProfesores).ToList();

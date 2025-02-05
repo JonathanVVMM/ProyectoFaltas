@@ -13,9 +13,11 @@ namespace ProyectoFaltas.Views
     {
         private DatabaseService database = new DatabaseService();
 
+        //---------------------------------------------------------- Events ----------------------------------------------------------
         public ObservableCollection<Event> Events { get; set; }
-        private Event _selectedEvent;
 
+        //---------------------------------------------------------- SelectedEvent ----------------------------------------------------------
+        private Event _selectedEvent;
         public Event SelectedEvent
         {
             get => _selectedEvent;
@@ -30,6 +32,7 @@ namespace ProyectoFaltas.Views
             }
         }
 
+        //---------------------------------------------------------- ListaFaltas ----------------------------------------------------------
         private ObservableCollection<Falta> _listaFaltas;
 
         public ObservableCollection<Falta> ListaFaltas
@@ -42,6 +45,7 @@ namespace ProyectoFaltas.Views
             }
         }
 
+        //---------------------------------------------------------- SelectedDay ----------------------------------------------------------
         private DateTime _selectedDay;
 
         public DateTime SelectedDay
@@ -54,15 +58,18 @@ namespace ProyectoFaltas.Views
             }
         }
 
+        //---------------------------------------------------------- ICommand ----------------------------------------------------------
         public ICommand DayTappedCommand { get; }
 
-        // Nueva propiedad IsEventSelected
+
+        //---------------------------------------------------------- EventSelected ----------------------------------------------------------
         public bool IsEventSelected
         {
             get => SelectedEvent != null; // No necesitamos un setter, solo un getter
         }
 
 
+        //---------------------------------------------------------- AddEventVisible ----------------------------------------------------------
         private bool _isAddEventVisible;
 
         public bool IsAddEventVisible
@@ -75,6 +82,7 @@ namespace ProyectoFaltas.Views
             }
         }
 
+        //---------------------------------------------------------- METODO PRINCIPAL ----------------------------------------------------------
         public ViewCalendar()
         {
             InitializeComponent();
@@ -82,6 +90,7 @@ namespace ProyectoFaltas.Views
             recargarLista();
         }
 
+        //---------------------------------------------------------- OnDayTapped ----------------------------------------------------------
         private void OnDayTapped(DateTime selectedDate)
         {
             // Establecer el día seleccionado
@@ -94,12 +103,12 @@ namespace ProyectoFaltas.Views
             if (SelectedEvent != null)
             {
                 // Mostrar detalles del evento seleccionado
-                IsAddEventVisible = false; // Ocultar formulario de selección de falta si ya existe un evento
+                IsAddEventVisible = true; // Ocultar formulario de selección de falta si ya existe un evento
             }
             else
             {
                 // Si no hay evento, mostrar el formulario para añadir una nueva falta
-                IsAddEventVisible = true;
+                IsAddEventVisible = false;
             }
 
             // Notificar que la propiedad ha cambiado (para la visibilidad de los elementos)
@@ -115,6 +124,7 @@ namespace ProyectoFaltas.Views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        //---------------------------------------------------------- recargarLista ----------------------------------------------------------
         private async void recargarLista()
         {
             if (Curso.CursoActual != null)
@@ -145,12 +155,39 @@ namespace ProyectoFaltas.Views
             }
         }
 
+        //---------------------------------------------------------- AddEventInThisDay_Clicked ----------------------------------------------------------
+        //private void AddEventInThisDay_Clicked(object sender, EventArgs e)
+        //{
+        //    DateTime fechaActual = SelectedDay;
+        //    Events.Add(new Event { Date = fechaActual });
+        //}
+
         private void AddEventInThisDay_Clicked(object sender, EventArgs e)
         {
-            DateTime fechaActual = DateTime.Now;
-            Events.Add(new Event { Date = fechaActual });
+            //Crear el evento
+            var newEvent = new Event
+            {
+                Date = SelectedDay,
+                Name = $"Evento del día {SelectedDay:dd/MM/yyyy}",
+                Description = "Nuevo evento añadido sin detalles."
+            };
+
+            // Añadir el evento a la lista de eventos
+            Events.Add(newEvent);
+
+            // Actualizar el evento 
+            SelectedEvent = newEvent;
+
+            // Refrescar la lista
+            recargarLista();
+
+            // Mostrar los detalles del evento recién creado (opcional)
+            IsAddEventVisible = true;
         }
 
+
+
+        //---------------------------------------------------------- AddEventWithDetails_Clicked ----------------------------------------------------------
         // Crear el método para añadir la falta con los detalles (el Picker de profesores y tipos de falta)
         private void AddEventWithDetails_Clicked(object sender, EventArgs e)
         {
@@ -183,6 +220,7 @@ namespace ProyectoFaltas.Views
             }
         }
 
+        //---------------------------------------------------------- METODO PRINCIPAL ----------------------------------------------------------
         private void CancelAddEvent_Clicked(object sender, EventArgs e)
         {
             // Cancelar la adición del evento, cerrar el formulario de selección
