@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,11 +49,41 @@ namespace ProyectoFaltas.Database
         }
 
         // Permite borrar a un profesor activo en un curso, PERO el profesor asi quede inactivo en ese curso no será eliminado de la tabla
-        public async Task<int> DeleteActivoAsync(Activo activo)
+        public async Task<int> DeleteActivoAsync(int idProfesor, int idCurso)
         {
             await Init();
+
+            var activo = await Database.Table<Activo>()
+                              .Where(a => a.IdCursos == idCurso && a.IdProfesores == idProfesor)
+                              .FirstOrDefaultAsync();
+
+            if (activo != null)
+            {
+                // Si encontramos el activo, lo eliminamos
+                await Database.DeleteAsync(activo);
+            }
+
             return await Database.DeleteAsync(activo);
         }
+
+        // Permite borrar todos los activos de un profesor
+        public async Task DeleteActivosAsync(int idProfesor)
+        {
+            await Init();
+
+            // Elimina todos los registros de la tabla Activo donde el ProfesorId coincida
+            var registrosActivos = await Database.Table<Activo>()
+                                                 .Where(a => a.IdProfesores == idProfesor)
+                                                 .ToListAsync();
+            
+            foreach (var activo in registrosActivos)
+            {
+                await Database.DeleteAsync(activo);
+            }
+            
+        }
+
+
 
         //Obetener el ultimo curso
         public async Task<int?> GetUltimoAnoCursoAsync()
@@ -68,6 +99,7 @@ namespace ProyectoFaltas.Database
             await Init();
             var activos = await Database.Table<Activo>().Where(a => a.IdCursos == idCurso).ToListAsync();
             var profesoresIds = activos.Select(a => a.IdProfesores).ToList();
+
             return await Database.Table<Profesor>().Where(p => profesoresIds.Contains(p.Id)).ToListAsync();
         }
 
@@ -142,6 +174,7 @@ namespace ProyectoFaltas.Database
             return await Database.DeleteAsync(falta);
         }
 
+
         // -------------------------- TABLA TIPOFALTA -------------------------- 
         public async Task<int> SaveTipoFaltaAsync(TipoFalta tipoFalta)
         {
@@ -202,9 +235,15 @@ namespace ProyectoFaltas.Database
         {
             await Init();
             if (profesor.Id != 0)
+            {
                 return await Database.UpdateAsync(profesor);
+            }
             else
+            {
+
                 return await Database.InsertAsync(profesor);
+            }
+
         }
 
         public async Task<List<Profesor>> GetProfesoresAsync()

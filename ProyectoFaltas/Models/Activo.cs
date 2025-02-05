@@ -11,12 +11,12 @@ namespace ProyectoFaltas.Models
     public class Activo
     {
         [PrimaryKey, AutoIncrement]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [Indexed]
-        public long IdCursos { get; set; }
+        public int IdCursos { get; set; }
 
         [Indexed]
-        public long IdProfesores { get; set; }
+        public int IdProfesores { get; set; }
     }
 }
