@@ -66,4 +66,14 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
         ListaFaltas = new ObservableCollection<Falta>(await database.GetFaltasProfesorAsync(IdProfesor));
 
     }
+
+    private async void Volver_Calendario_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//ViewCalendar");
+    }
+
+    private async void Editar_Profe_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//ViewEditTeacher");
+    }
 }
