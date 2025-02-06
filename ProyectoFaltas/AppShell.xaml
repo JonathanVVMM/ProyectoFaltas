@@ -38,4 +38,7 @@
         </Tab>
     </TabBar>
 
+    <ShellContent
+        ContentTemplate="{DataTemplate views:ViewTeacherNonAttendances}"
+        Route="ViewTeacherNonAttendances"/>
 </Shell>
