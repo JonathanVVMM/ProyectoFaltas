@@ -197,6 +197,7 @@ namespace ProyectoFaltas.Database
                     IdProfesores = falta.IdProfesores,
                     IdTipoFalta = falta.IdTipoFalta,
                     Fecha = falta.Fecha,
+                    UltimaModificacion = falta.UltimaModificacion,
                     profesorNombreApellido = profesor != null ? profesor.Nombre + " " + profesor.Apellidos : "",
                     nombreTipoFalta = tipoFalta != null ? tipoFalta.Tipo : ""
                 });

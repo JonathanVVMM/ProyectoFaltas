@@ -88,6 +88,8 @@ namespace ProyectoFaltas.Views
             }
         }
 
+        public string stringSelectedDay => SelectedDay.ToString("d");
+
         public ViewCalendar()
         {
             InitializeComponent();
