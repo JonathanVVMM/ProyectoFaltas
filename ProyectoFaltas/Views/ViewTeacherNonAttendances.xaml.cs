@@ -56,6 +56,8 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
         }
     }
 
+
+
     public ViewTeacherNonAttendances()
     {
         InitializeComponent();

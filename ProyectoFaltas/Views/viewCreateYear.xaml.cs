@@ -51,13 +51,18 @@ public partial class viewCreateYear : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
+
         if (await App.Current.MainPage.DisplayAlert("Crear Curso", $"Está seguro de crear el curso {Nombre} ?", "Confirmar", "Cancelar"))
         {
             var nuevoCurso = new Curso { NombreCurso = Nombre };
             await _databaseService.AddCursoAsync(nuevoCurso);
             await SeleccionarCursoAsync(nuevoCurso.Id);
         }
+    }
 
+    public void IconoHome()
+    {
+        DisplayAlert("Información", "Esta página es para crear un curso:\n - Si el curso existe no te deja crearlo\n - Si ya existe un curso con ese nombre tampoco", "Entendido");
     }
 
     private async void Volver_HomePage_Clicked(object sender, EventArgs e)

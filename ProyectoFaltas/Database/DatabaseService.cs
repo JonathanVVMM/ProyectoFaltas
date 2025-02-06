@@ -134,6 +134,10 @@ namespace ProyectoFaltas.Database
             return await Database.DeleteAsync(curso);
         }
 
+        public async Task<bool> ExisteCurso(string nombreCurso)
+        {
+            return await Database.Table<Curso>().Where(c => c.NombreCurso == nombreCurso).FirstOrDefaultAsync().ContinueWith(t => t.Result != null);
+        }
 
         // -------------------------- TABLA FALTA -------------------------- 
         public async Task<int> AddFaltaAsync(Falta falta)
