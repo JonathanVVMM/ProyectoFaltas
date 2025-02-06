@@ -67,10 +67,10 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
 
     public async void recargarDatos()
     {
-        int filtro;
         ProfesorMostrado = await database.GetProfesorAsync(IdProfesor);
         List<Falta> faltas = await database.GetFaltasProfesorAsync(IdProfesor);
 
+        int filtro;
         if (int.TryParse(eFiltro.Text, out filtro) && filtro > 0 && filtro < 13)
             faltas = faltas.Where(f => f.Fecha.Month == filtro).ToList();
 
