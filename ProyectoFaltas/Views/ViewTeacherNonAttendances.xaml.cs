@@ -1,4 +1,4 @@
-using GameController;
+
 using ProyectoFaltas.Database;
 using ProyectoFaltas.Models;
 using System.Collections.ObjectModel;
