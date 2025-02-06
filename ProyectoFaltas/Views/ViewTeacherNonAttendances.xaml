@@ -16,17 +16,17 @@
 
                         <VerticalStackLayout Grid.Row="0">
                             <Label Text="Nombre"/>
-                            <Entry  Text="{Binding ProfesorEditando.Nombre}" BackgroundColor="LightGray"/>
+                            <Entry  Text="{Binding ProfesorMostrado.Nombre}" BackgroundColor="LightGray"/>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="1">
                             <Label Text="Apellidos" />
-                            <Entry  Text="{Binding ProfesorEditando.Apellidos}"  BackgroundColor="LightGray"/>
+                            <Entry  Text="{Binding ProfesorMostrado.Apellidos}"  BackgroundColor="LightGray"/>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="2">
                             <Label Text="Tipo" />
-                            <Entry Text="{Binding ProfesorEditando.Tipo}"  BackgroundColor="LightGray"/>
+                            <Entry Text="{Binding ProfesorMostrado.Tipo}"  BackgroundColor="LightGray"/>
                         </VerticalStackLayout>
 
                     </Grid>
@@ -37,15 +37,49 @@
 
         <Frame Grid.Column="1">
 
-            <Grid RowDefinitions="auto,auto">
+            <Grid RowDefinitions="auto,auto" RowSpacing="10">
                 <Grid ColumnDefinitions="auto,*" Grid.Row="0" ColumnSpacing="10">
                     <Label Grid.Column="0" Text="Buscar falta: " VerticalOptions="Center"/>
                     <Entry Grid.Column="1" Placeholder="año | formato = aaaa/aaaa | ejemplo = 2024/2025" VerticalOptions="Center"/>
                 </Grid>
-              
+
+                <Grid  Grid.Row="1" HorizontalOptions="Center">
+                    <ScrollView>
+
+                        <CollectionView x:Name="ListaFaltaCalendario" ItemsSource="{Binding ListaFaltas, Mode=TwoWay}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" Span="2"
+                                                 VerticalItemSpacing="5" HorizontalItemSpacing="5"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame CornerRadius="0">
+                                        <Grid RowDefinitions="auto,auto,auto">
+                                            <HorizontalStackLayout Spacing="10" Grid.Row="0">
+                                                <Label Text="Nombre:"/>
+                                                <Label Text="{Binding profesorNombreApellido}"/>
+                                            </HorizontalStackLayout>
+
+                                            <HorizontalStackLayout Spacing="10" Grid.Row="1">
+                                                <Label Text="Tipo falta:"/>
+                                                <Label Text="{Binding nombreTipoFalta}"/>
+                                            </HorizontalStackLayout>
+
+                                            <HorizontalStackLayout Spacing="10" Grid.Row="2">
+                                                <Label Text="Ultima modificaión:"/>
+                                                <Label Text="{Binding UltimaModificacion}"/>
+                                            </HorizontalStackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                </Grid>
+
             </Grid>
 
-            
+
 
         </Frame>
 
@@ -53,7 +87,7 @@
         <Button Text="Volver a Crear Profesores" VerticalOptions="End" HorizontalOptions="End"/>
 
     </Grid>
-    
-    
+
+
 
 </ContentPage>

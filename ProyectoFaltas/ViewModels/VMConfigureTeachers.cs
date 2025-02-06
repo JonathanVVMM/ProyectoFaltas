@@ -249,7 +249,7 @@ namespace ProyectoFaltas.ViewModels
         {
             if (await App.Current.MainPage.DisplayAlert("Faltas del Profesor", "Si acepta será cambiado de página a la lista de faltas de este profesor", "Confirmar", "Cancelar"))
             {
-                await Shell.Current.GoToAsync("//ViewTeacherNonAttendances");
+                await Shell.Current.GoToAsync($"//ViewTeacherNonAttendances?IdProfesor={ItemId}");
             }
         }
 

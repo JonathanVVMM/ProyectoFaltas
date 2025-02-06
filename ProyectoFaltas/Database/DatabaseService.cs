@@ -165,6 +165,12 @@ namespace ProyectoFaltas.Database
             return await Database.Table<Falta>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
+        public async Task<List<Falta>> GetFaltasProfesorAsync(int idProfesor)
+        {
+            await Init();
+            return await Database.Table<Falta>().Where(i => i.IdProfesores == idProfesor).ToListAsync();
+        }
+
         public async Task<int> DeleteFaltaAsync(Falta falta)
         {
             await Init();
