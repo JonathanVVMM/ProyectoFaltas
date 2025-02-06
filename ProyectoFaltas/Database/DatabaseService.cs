@@ -156,7 +156,7 @@ namespace ProyectoFaltas.Database
         public async Task<List<Falta>> GetFaltasPorDiaAsync(DateTime fecha)
         {
             await Init();
-            return await Database.Table<Falta>().Where(i => i.Fecha == fecha).ToListAsync();
+            return await Database.Table<Falta>().Where(i => i.Fecha == fecha && i.IdCursos == Curso.CursoActual.Id).ToListAsync();
         }
 
         public async Task<Falta> GetFaltaAsync(int id)
@@ -202,7 +202,7 @@ namespace ProyectoFaltas.Database
             await Init();
 
             //Obtiene las faltas por fecha
-            var faltas = await Database.Table<Falta>().Where(i => i.Fecha == fecha).ToListAsync();
+            var faltas = await Database.Table<Falta>().Where(i => i.Fecha == fecha && i.IdCursos == Curso.CursoActual.Id).ToListAsync();
 
             var listaFaltas = new List<Falta>();
 
@@ -228,6 +228,15 @@ namespace ProyectoFaltas.Database
             }
 
             return listaFaltas;
+        }
+
+        public async Task<bool> ExisteFalta(int idProfesor, DateTime fecha)
+        {
+
+            Falta falta = await Database.Table<Falta>().Where(p => p.IdProfesores == idProfesor && p.Fecha == fecha && p.IdCursos == Curso.CursoActual.Id).FirstOrDefaultAsync();
+
+            if (falta != null) return true;
+            else return false;
         }
 
 

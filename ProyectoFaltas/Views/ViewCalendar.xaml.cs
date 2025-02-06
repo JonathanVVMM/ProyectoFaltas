@@ -119,14 +119,23 @@ namespace ProyectoFaltas.Views
         //---------------------------------------------------------- AddFalta_Clicked ----------------------------------------------------------
         private async void AddFalta_Clicked(object sender, EventArgs e)
         {
-            var falta = new Falta();
-            falta.Fecha = SelectedDay;
-            falta.IdCursos = Curso.CursoActual.Id;
-            falta.IdProfesores = ProfesorSeleccionado.Id;
-            falta.IdTipoFalta = TipoFaltaSeleccionado.Id;
-            falta.UltimaModificacion = DateTime.Now;
-            await database.AddFaltaAsync(falta);
-            recargarLista();
+
+            if (await database.ExisteFalta(ProfesorSeleccionado.Id, SelectedDay))
+            {
+                await DisplayAlert("FALTA EXISTENTE", "Esta falta ya existe", "Entendido");
+            }
+            else
+            {
+                var falta = new Falta();
+                falta.Fecha = SelectedDay;
+                falta.IdCursos = Curso.CursoActual.Id;
+                falta.IdProfesores = ProfesorSeleccionado.Id;
+                falta.IdTipoFalta = TipoFaltaSeleccionado.Id;
+                falta.UltimaModificacion = DateTime.Now;
+                await database.AddFaltaAsync(falta);
+                recargarLista();
+            }
+
         }
 
         //---------------------------------------------------------- FaltasProfesorCommand ----------------------------------------------------------

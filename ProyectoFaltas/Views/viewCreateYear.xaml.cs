@@ -51,9 +51,13 @@ public partial class viewCreateYear : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        var nuevoCurso = new Curso { NombreCurso = Nombre };
-        await _databaseService.AddCursoAsync(nuevoCurso);
-        await SeleccionarCursoAsync(nuevoCurso.Id);
+        if (await App.Current.MainPage.DisplayAlert("Crear Curso", $"Está seguro de crear el curso {Nombre} ?", "Confirmar", "Cancelar"))
+        {
+            var nuevoCurso = new Curso { NombreCurso = Nombre };
+            await _databaseService.AddCursoAsync(nuevoCurso);
+            await SeleccionarCursoAsync(nuevoCurso.Id);
+        }
+
     }
 
     private async void Volver_HomePage_Clicked(object sender, EventArgs e)
