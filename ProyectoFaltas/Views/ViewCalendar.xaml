@@ -49,7 +49,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Frame CornerRadius="0">
-                                        <Grid RowDefinitions="auto,auto,auto">
+                                        <Grid RowDefinitions="auto,auto,auto,auto">
                                             <HorizontalStackLayout Spacing="10" Grid.Row="0">
                                                 <Label Text="Nombre:"/>
                                                 <Label Text="{Binding profesorNombreApellido}"/>
@@ -63,6 +63,16 @@
                                             <HorizontalStackLayout Spacing="10" Grid.Row="2">
                                                 <Label Text="Ultima modificaión:"/>
                                                 <Label Text="{Binding UltimaModificacion}"/>
+                                            </HorizontalStackLayout>
+
+                                            <HorizontalStackLayout Spacing="10" Grid.Row="3">
+                                                <ImageButton Source="ausencia.png"
+                                                             Grid.Column="1" HorizontalOptions="Center" Aspect="AspectFit"
+                                                             HeightRequest="40"
+                                                             WidthRequest="40"
+                                                             BackgroundColor="Transparent"
+                                                             Command="{Binding Source={x:Reference ListaFaltaCalendario}, Path=BindingContext.FaltasProfesorCommand}"
+                                                             CommandParameter="{Binding IdProfesores}"/>
                                             </HorizontalStackLayout>
                                         </Grid>
                                     </Frame>

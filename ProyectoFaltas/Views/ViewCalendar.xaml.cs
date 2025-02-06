@@ -93,8 +93,10 @@ namespace ProyectoFaltas.Views
         public ViewCalendar()
         {
             InitializeComponent();
+            FaltasProfesorCommand = new Command<int>(FaltasProfesor);
         }
 
+        //---------------------------------------------------------- Refrescar listas ----------------------------------------------------------
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -114,6 +116,7 @@ namespace ProyectoFaltas.Views
             }
         }
 
+        //---------------------------------------------------------- AddFalta_Clicked ----------------------------------------------------------
         private async void AddFalta_Clicked(object sender, EventArgs e)
         {
             var falta = new Falta();
@@ -124,6 +127,17 @@ namespace ProyectoFaltas.Views
             falta.UltimaModificacion = DateTime.Now;
             await database.AddFaltaAsync(falta);
             recargarLista();
+        }
+
+        //---------------------------------------------------------- FaltasProfesorCommand ----------------------------------------------------------
+        public ICommand FaltasProfesorCommand { get; set; }
+
+        public async void FaltasProfesor(int ItemId)
+        {
+            if (await App.Current.MainPage.DisplayAlert("Faltas del Profesor", "Si acepta será cambiado de página a la lista de faltas de este profesor", "Confirmar", "Cancelar"))
+            {
+                await Shell.Current.GoToAsync($"//ViewTeacherNonAttendances?IdProfesor={ItemId}");
+            }
         }
     }
 
