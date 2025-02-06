@@ -51,13 +51,21 @@ public partial class viewCreateYear : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-
-        if (await App.Current.MainPage.DisplayAlert("Crear Curso", $"Está seguro de crear el curso {Nombre} ?", "Confirmar", "Cancelar"))
+        if (await _databaseService.ExisteCurso(Nombre))
         {
-            var nuevoCurso = new Curso { NombreCurso = Nombre };
-            await _databaseService.AddCursoAsync(nuevoCurso);
-            await SeleccionarCursoAsync(nuevoCurso.Id);
+            await DisplayAlert("EXISTE CURSO", "Este curso ya existe, no se puede crear", "Entendido");
         }
+        else
+        {
+            if (await App.Current.MainPage.DisplayAlert("Crear Curso", $"Está seguro de crear el curso {Nombre} ?", "Confirmar", "Cancelar"))
+            {
+                var nuevoCurso = new Curso { NombreCurso = Nombre };
+                await _databaseService.AddCursoAsync(nuevoCurso);
+                await SeleccionarCursoAsync(nuevoCurso.Id);
+            }
+        }
+
+
     }
 
     public void IconoHome()
