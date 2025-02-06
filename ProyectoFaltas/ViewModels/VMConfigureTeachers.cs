@@ -45,7 +45,7 @@ namespace ProyectoFaltas.ViewModels
         {
 
             ModifyProfesorCommand = new Command<int>(ModifyProfesor);
-            DeleteProfesorCommand = new Command<int>(DeleteProfesor);
+            FaltasProfesorCommand = new Command<int>(FaltasProfesor);
             AddProfesorCommand = new Command(AddProfesor);
             CancelarActualizarProfesorCommand = new Command(CancelarActualizarProfesor);
             ActualizarProfesorCommand = new Command(ActualizarProfesor);
@@ -193,7 +193,7 @@ namespace ProyectoFaltas.ViewModels
         public ICommand IconoAyudaEditarDatosCommand { get; set; }
         public ICommand IconoAyudaListaDatosCommand { get; set; }
         public ICommand AddProfesorCommand { get; set; }
-        public ICommand DeleteProfesorCommand { get; set; }
+        public ICommand FaltasProfesorCommand { get; set; }
         public ICommand ModifyProfesorCommand { get; set; }
         public ICommand ActualizarProfesorCommand { get; set; }
         public ICommand CancelarActualizarProfesorCommand { get; set; }
@@ -245,22 +245,11 @@ namespace ProyectoFaltas.ViewModels
             }
         }
 
-        public async void DeleteProfesor(int ItemId)
+        public async void FaltasProfesor(int ItemId)
         {
-            if (await App.Current.MainPage.DisplayAlert("Borrar Profesor", "Está seguro de borrar el profesor seleccionado?", "Confirmar", "Cancelar"))
+            if (await App.Current.MainPage.DisplayAlert("Faltas del Profesor", "Si acepta será cambiado de página a la lista de faltas de este profesor", "Confirmar", "Cancelar"))
             {
-                Profesor p = await database.GetProfesorAsync(ItemId);
-
-                NombreNuevo = ""; ApellidosNuevo = ""; TipoNuevo = "";
-                ProfesorEditando = null;
-                Editando = false;
-                await database.DeleteProfesorAsync(p);
-                await database.DeleteActivosAsync(ItemId);
-
-                recargarLista();
-
-
-
+                await Shell.Current.GoToAsync("//ViewTeacherNonAttendances");
             }
         }
 

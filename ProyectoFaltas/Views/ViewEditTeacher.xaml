@@ -63,12 +63,12 @@
                                                              Command="{Binding Source={x:Reference MiListaEditable}, Path=BindingContext.ModifyProfesorCommand}"
                                                              CommandParameter="{Binding Id}"/>
 
-                                                <ImageButton Source="borrar.png"
+                                                <ImageButton Source="ausencia.png"
                                                              Grid.Column="1" HorizontalOptions="Center" Aspect="AspectFit"
                                                              HeightRequest="40"
                                                              WidthRequest="40"
                                                              BackgroundColor="Transparent"
-                                                             Command="{Binding Source={x:Reference MiListaEditable}, Path=BindingContext.DeleteProfesorCommand}"
+                                                             Command="{Binding Source={x:Reference MiListaEditable}, Path=BindingContext.FaltasProfesorCommand}"
                                                              CommandParameter="{Binding Id}"/>
                                             </Grid>
 
