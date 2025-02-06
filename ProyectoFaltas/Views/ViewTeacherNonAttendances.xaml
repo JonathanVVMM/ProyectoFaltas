@@ -58,7 +58,7 @@
 
                 <Grid ColumnDefinitions="auto,*" Grid.Row="1" ColumnSpacing="10">
                     <Label Grid.Column="0" Text="Buscar falta: " VerticalOptions="Center" FontAttributes="Bold"/>
-                    <Entry Grid.Column="1" Placeholder="Mes | formato = mm | ejemplo = 01" VerticalOptions="Center"/>
+                    <Entry x:Name="eFiltro"  Text="" Grid.Column="1" Placeholder="Mes | formato = mm | ejemplo = 01" VerticalOptions="Center" TextChanged="Entry_TextChanged"/>
                 </Grid>
 
 

@@ -1,7 +1,9 @@
+using GameController;
 using ProyectoFaltas.Database;
 using ProyectoFaltas.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace ProyectoFaltas.Views;
@@ -42,6 +44,7 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
         }
     }
 
+
     private ObservableCollection<Falta> _listaFaltas;
     public ObservableCollection<Falta> ListaFaltas
     {
@@ -62,8 +65,14 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
 
     public async void recargarDatos()
     {
+        int filtro;
         ProfesorMostrado = await database.GetProfesorAsync(IdProfesor);
-        ListaFaltas = new ObservableCollection<Falta>(await database.GetFaltasProfesorAsync(IdProfesor));
+        List<Falta> faltas = await database.GetFaltasProfesorAsync(IdProfesor);
+
+        if (int.TryParse(eFiltro.Text, out filtro) && filtro > 0 && filtro < 13)
+            faltas = faltas.Where(f => f.Fecha.Month == filtro).ToList();
+
+        ListaFaltas = new ObservableCollection<Falta>(faltas);
 
     }
 
@@ -75,5 +84,10 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
     private async void Editar_Profe_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//ViewEditTeacher");
+    }
+
+    private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        recargarDatos();
     }
 }
