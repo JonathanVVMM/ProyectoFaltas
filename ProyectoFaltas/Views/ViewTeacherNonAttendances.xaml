@@ -84,7 +84,7 @@
 
                                         <HorizontalStackLayout Spacing="10" Grid.Row="2">
                                             <Label Text="Última:"/>
-                                            <Label Text="{Binding Fecha,StringFormat='{0:dd/MM/yyyy}'}"/>
+                                            <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}"/>
                                         </HorizontalStackLayout>
 
                                         <HorizontalStackLayout Spacing="10" Grid.Row="3">
