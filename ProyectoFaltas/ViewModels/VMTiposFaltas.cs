@@ -52,6 +52,9 @@ namespace ProyectoFaltas.ViewModels
             AddElementCommand = new Command(AddElement);
             ModifyTipoFaltaCommand = new Command<int>(ModifyTipoFalta);
             ActualizarTipoFaltaCommand = new Command(ActualizarTipoFalta);
+            IconTipoFaltaCommand = new Command(IconTipoFalta);
+            IconCrearTipoFaltaCommand = new Command(IconCrearTipoFalta);
+            IconActualizarTipoFaltaCommand = new Command(IconActualizarTipoFalta);
             CancelarActualizarTipoFaltaCommand = new Command(CancelarActualizarTipoFalta);
         }
 
@@ -239,6 +242,27 @@ namespace ProyectoFaltas.ViewModels
         }
 
         //---------------------------------------------------------- BOTONES AYUDA ----------------------------------------------------------
+
+        public ICommand IconTipoFaltaCommand { get; set; }
+        public ICommand IconCrearTipoFaltaCommand { get; set; }
+        public ICommand IconActualizarTipoFaltaCommand { get; set; }
+
+        public async void IconTipoFalta()
+        {
+            await App.Current.MainPage.DisplayAlert("Información de ayuda", "Este apartado te muestra los tipos de faltas que hay y te permite modificarlas.\nCuando le das al botón de editar te activo el modo edición y te sale un menu abajo a la derecha", "Salir");
+        }
+
+        public async void IconCrearTipoFalta()
+        {
+            await App.Current.MainPage.DisplayAlert("Información de ayuda", "Tiene 2 campo, un campo que escribes a mano el tipo de falta y una lista que te deja elegir de que color quieres que sea la falta", "Salir");
+        }
+
+        public async void IconActualizarTipoFalta()
+        {
+            await App.Current.MainPage.DisplayAlert("Información de ayuda", "Te permite actualizar la falta que has elegido para editar", "Salir");
+        }
+
+
 
     }
 }

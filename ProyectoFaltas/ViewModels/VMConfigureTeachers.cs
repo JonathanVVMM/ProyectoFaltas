@@ -207,9 +207,9 @@ namespace ProyectoFaltas.ViewModels
                 int cont = 0;
                 foreach (var item2 in ListaActivos)
                 {
-                    if(item.Id == item2.Id) { item.Estado = "Activo"; cont+=1;}
+                    if (item.Id == item2.Id) { item.Estado = "Activo"; cont += 1; }
                 }
-                if(cont == 0) { item.Estado = "Inactivo"; }
+                if (cont == 0) { item.Estado = "Inactivo"; }
                 await database.SaveProfesorAsync(item);
             }
             recargarLista();
@@ -292,22 +292,23 @@ namespace ProyectoFaltas.ViewModels
 
                 if (cambiarActivo)
                 {
-                    if(EstadoNuevo == "Activo")
+                    if (EstadoNuevo == "Activo")
                     {
                         var activoNuevo = new Activo();
                         activoNuevo.IdCursos = Curso.CursoActual.Id;
                         activoNuevo.IdProfesores = ProfesorEditando.Id;
                         await database.AddActivoAsync(activoNuevo);
-                    } else
+                    }
+                    else
                     {
                         await database.DeleteActivoAsync(ProfesorEditando.Id, Curso.CursoActual.Id);
                     }
                 }
-                
+
                 Editando = false;
                 ProfesorEditando = null;
                 NombreNuevo = ""; ApellidosNuevo = ""; TipoNuevo = ""; EstadoNuevo = "";
-                
+
                 recargarLista();
             }
         }

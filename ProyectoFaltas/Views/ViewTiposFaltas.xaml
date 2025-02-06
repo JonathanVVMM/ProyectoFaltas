@@ -29,7 +29,7 @@
                                      HeightRequest="10"
                                      WidthRequest="10"
                                      BackgroundColor="Transparent" IsEnabled="True"
-                                     Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                                     Command="{Binding IconTipoFaltaCommand}"/>
                     </Grid>
 
                     <ScrollView Grid.Row="1">
@@ -74,7 +74,7 @@
                     <Grid RowDefinitions="auto,auto,auto" RowSpacing="15">
                         <Grid Grid.Row="0">
                             <Label Text="Crear las faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
-                            <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit" HeightRequest="10" WidthRequest="10" BackgroundColor="Transparent" IsEnabled="True" Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                            <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit" HeightRequest="10" WidthRequest="10" BackgroundColor="Transparent" IsEnabled="True" Command="{Binding IconCrearTipoFaltaCommand}"/>
                         </Grid>
 
                         <ScrollView  Grid.Row="1">
@@ -95,7 +95,7 @@
                     <Grid RowDefinitions="auto,auto,auto" RowSpacing="15">
                         <Grid Grid.Row="0">
                             <Label Text="Modificar las faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
-                            <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit" HeightRequest="10" WidthRequest="10" BackgroundColor="Transparent" IsEnabled="True" Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                            <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit" HeightRequest="10" WidthRequest="10" BackgroundColor="Transparent" IsEnabled="True" Command="{Binding IconActualizarTipoFaltaCommand}"/>
                         </Grid>
 
                         <ScrollView  Grid.Row="1">
