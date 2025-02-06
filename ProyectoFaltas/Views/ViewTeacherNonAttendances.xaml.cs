@@ -63,7 +63,7 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
     public async void recargarDatos()
     {
         ProfesorMostrado = await database.GetProfesorAsync(IdProfesor);
-        ListaFaltas = new ObservableCollection<Falta>(await database.GetFaltasAsync(IdProfesor));
+        ListaFaltas = new ObservableCollection<Falta>(await database.GetFaltasProfesorAsync(IdProfesor));
 
     }
 }

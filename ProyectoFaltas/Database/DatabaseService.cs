@@ -168,7 +168,25 @@ namespace ProyectoFaltas.Database
         public async Task<List<Falta>> GetFaltasProfesorAsync(int idProfesor)
         {
             await Init();
-            return await Database.Table<Falta>().Where(i => i.IdProfesores == idProfesor).ToListAsync();
+
+            var listaFaltas = new List<Falta>();
+
+            var profesor = await Database.Table<Profesor>().Where(i => i.Id == idProfesor).FirstOrDefaultAsync();
+
+            var faltas = await Database.Table<Falta>().Where(i => i.IdProfesores == idProfesor).ToListAsync();
+
+
+
+            foreach (Falta item in faltas)
+            {
+                var tipoFalta = await Database.Table<TipoFalta>().Where(i => i.Id == item.IdTipoFalta).FirstOrDefaultAsync();
+
+                item.profesorNombreApellido = profesor != null ? profesor.Nombre + " " + profesor.Apellidos : "";
+                item.nombreTipoFalta = tipoFalta != null ? tipoFalta.Tipo : "";
+                listaFaltas.Add(item);
+            }
+
+            return listaFaltas;
         }
 
         public async Task<int> DeleteFaltaAsync(Falta falta)
