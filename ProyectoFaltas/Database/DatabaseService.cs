@@ -173,7 +173,7 @@ namespace ProyectoFaltas.Database
 
             var profesor = await Database.Table<Profesor>().Where(i => i.Id == idProfesor).FirstOrDefaultAsync();
 
-            var faltas = await Database.Table<Falta>().Where(i => i.IdProfesores == idProfesor).ToListAsync();
+            var faltas = await Database.Table<Falta>().Where(i => i.IdProfesores == idProfesor && i.IdCursos == Curso.CursoActual.Id).ToListAsync();
 
 
 
