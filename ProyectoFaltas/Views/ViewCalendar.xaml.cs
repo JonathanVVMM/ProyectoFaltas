@@ -90,6 +90,9 @@ namespace ProyectoFaltas.Views
 
         public string stringSelectedDay => SelectedDay.ToString("d");
 
+        public ObservableCollection<ColorOption> ColorOptions { get; set; } = ColorOption.ColorOptions;
+
+
         public ViewCalendar()
         {
             InitializeComponent();
