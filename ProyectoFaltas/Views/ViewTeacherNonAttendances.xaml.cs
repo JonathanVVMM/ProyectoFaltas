@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace ProyectoFaltas.Views;
 
@@ -56,12 +57,44 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
         }
     }
 
+    private ObservableCollection<TipoFalta> _listaTipoFaltas;
+    public ObservableCollection<TipoFalta> ListaTipoFaltas
+    {
+        get => _listaTipoFaltas;
+        set
+        {
+            _listaTipoFaltas = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private TipoFalta _tipoFaltaNuevo;
+    public TipoFalta TipoFaltaNuevo
+    {
+        get => _tipoFaltaNuevo;
+        set
+        {
+            _tipoFaltaNuevo = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private bool _modificandoFalta = false;
+    public bool ModificandoFalta
+    {
+        get => _modificandoFalta;
+        set
+        {
+            _modificandoFalta = value;
+            OnPropertyChanged();
+        }
+    }
 
 
     public ViewTeacherNonAttendances()
     {
         InitializeComponent();
-
+        ModificarFaltaCommand = new Command<int>(ModificarFalta);
         BindingContext = this;
     }
 
@@ -75,7 +108,7 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
             faltas = faltas.Where(f => f.Fecha.Month == filtro).ToList();
 
         ListaFaltas = new ObservableCollection<Falta>(faltas);
-
+        ListaTipoFaltas = new ObservableCollection<TipoFalta>(await database.GetTipoFaltasAsync());
     }
 
     private async void Volver_Calendario_Clicked(object sender, EventArgs e)
@@ -92,4 +125,49 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
     {
         recargarDatos();
     }
+
+    private Falta _faltaModificando;
+    public Falta FaltaModificando
+    {
+        get => _faltaModificando;
+        set
+        {
+            _faltaModificando = value;
+            OnPropertyChanged();
+
+        }
+    }
+    public ICommand ModificarFaltaCommand { get; set; }
+
+    public async void ModificarFalta(int idFalta)
+    {
+        if (await App.Current.MainPage.DisplayAlert("Actualizar Falta", "¿ Está seguro de actualizaciar la falta del profesor?", "Confirmar", "Cancelar"))
+        {
+            FaltaModificando = await database.GetFaltaAsync(idFalta);
+            ModificandoFalta = true;
+        }
+    }
+
+    public void CancerlarModificarFalta(object sender, EventArgs e)
+    {
+        FaltaModificando = null;
+        ModificandoFalta = false;
+    }
+
+    public async void GuardarModificarFalta(object sender, EventArgs e)
+    {
+
+
+        if (TipoFaltaNuevo != null)
+        {
+            FaltaModificando.IdTipoFalta = TipoFaltaNuevo.Id;
+        }
+        await database.AddFaltaAsync(FaltaModificando);
+        TipoFaltaNuevo = null;
+        FaltaModificando = null;
+        ModificandoFalta = false;
+        recargarDatos();
+    }
+
+
 }

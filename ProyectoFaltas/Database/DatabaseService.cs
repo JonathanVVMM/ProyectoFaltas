@@ -166,8 +166,21 @@ namespace ProyectoFaltas.Database
         public async Task<Falta> GetFaltaAsync(int id)
         {
             await Init();
-            return await Database.Table<Falta>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            Falta faltaProvisional = await Database.Table<Falta>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            TipoFalta tipoFaltaProvisional = await Database.Table<TipoFalta>().Where(i => i.Id == faltaProvisional.IdTipoFalta).FirstOrDefaultAsync();
+
+            Falta nuevaFalta = new Falta();
+            nuevaFalta.Fecha = faltaProvisional.Fecha;
+            nuevaFalta.Id = faltaProvisional.Id;
+            nuevaFalta.IdProfesores = faltaProvisional.IdProfesores;
+            nuevaFalta.IdTipoFalta = faltaProvisional.IdTipoFalta;
+            nuevaFalta.UltimaModificacion = faltaProvisional.UltimaModificacion;
+            nuevaFalta.IdCursos = faltaProvisional.IdCursos;
+            nuevaFalta.nombreTipoFalta = tipoFaltaProvisional.Tipo;
+
+            return nuevaFalta;
         }
+
 
         public async Task<List<Falta>> GetFaltasProfesorAsync(int idProfesor)
         {
@@ -242,6 +255,8 @@ namespace ProyectoFaltas.Database
             if (falta != null) return true;
             else return false;
         }
+
+
 
 
         // -------------------------- TABLA TIPOFALTA -------------------------- 

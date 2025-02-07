@@ -55,23 +55,30 @@
                                  Command="{Binding IconoAyudaEditarDatosCommand}"/>
                 </Grid>
 
-                <VerticalStackLayout Grid.Row="1" IsEnabled="False">
-                    <Grid RowDefinitions="*,*,*" RowSpacing="10">
+                <VerticalStackLayout Grid.Row="1" >
+                    <Grid RowDefinitions="*,*,*,*" RowSpacing="10">
 
-                        <VerticalStackLayout Grid.Row="0">
-                            <Label Text="Nombre"/>
-                            <Entry  Text="{Binding ProfesorMostrado.Nombre}" BackgroundColor="LightGray"/>
+                        <VerticalStackLayout Grid.Row="0" IsEnabled="False">
+                            <Label Text="Fecha"/>
+                            <Entry  Text="{Binding FaltaModificando.Fecha, StringFormat='{0:dd/MM/yyyy}'}" BackgroundColor="LightGray"/>
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout Grid.Row="1">
-                            <Label Text="Apellidos" />
-                            <Entry  Text="{Binding ProfesorMostrado.Apellidos}"  BackgroundColor="LightGray"/>
+                        <VerticalStackLayout Grid.Row="1" IsEnabled="False">
+                            <Label Text="Tipo de falta" />
+                            <Entry  Text="{Binding FaltaModificando.nombreTipoFalta}"  BackgroundColor="LightGray"/>
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout Grid.Row="2">
-                            <Label Text="Tipo" />
-                            <Entry Text="{Binding ProfesorMostrado.Tipo}"  BackgroundColor="LightGray"/>
+                        <VerticalStackLayout Grid.Row="2" IsEnabled="{Binding ModificandoFalta}">
+                            <Label Text="Elegir tipo de falta nueva"/>
+                            <Picker Grid.Row="3" ItemsSource="{Binding ListaTipoFaltas}" SelectedItem="{Binding TipoFaltaNuevo, Mode=TwoWay}" ItemDisplayBinding="{Binding Tipo}" HorizontalOptions="FillAndExpand"/>
                         </VerticalStackLayout>
+
+                        <HorizontalStackLayout Grid.Row="3" IsEnabled="{Binding ModificandoFalta}">
+                            <Button Text="Actualizar" Clicked="GuardarModificarFalta"/>
+                            <Button Text="Cancelar" Clicked="CancerlarModificarFalta"/>
+                        </HorizontalStackLayout>
+
+
 
                     </Grid>
                 </VerticalStackLayout>
@@ -138,9 +145,9 @@
                                                          Grid.Column="0" HorizontalOptions="Center" Aspect="AspectFit"
                                                          HeightRequest="40"
                                                          WidthRequest="40"
-                                                         BackgroundColor="Transparent"/>
-                                            <!--="{Binding Source={x:Reference MiListaEditable}, Path=BindingContext.ModifyProfesorCommand}"
-                                            CommandParameter="{Binding Id}"/>-->
+                                                         BackgroundColor="Transparent"
+                                                         Command="{Binding Source={x:Reference ListaFaltaCalendario}, Path=BindingContext.ModificarFaltaCommand}"
+                                                         CommandParameter="{Binding Id}"/>
                                         </HorizontalStackLayout>
                                     </Grid>
                                 </Frame>
