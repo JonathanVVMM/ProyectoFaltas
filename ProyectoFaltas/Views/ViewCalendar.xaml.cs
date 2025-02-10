@@ -88,8 +88,6 @@ namespace ProyectoFaltas.Views
             }
         }
 
-        public HexColorConverter HexColorConverter { get; set; } = new HexColorConverter();
-
 
         public string stringSelectedDay => SelectedDay.ToString("d");
 

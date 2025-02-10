@@ -201,6 +201,7 @@ namespace ProyectoFaltas.Database
 
                 item.profesorNombreApellido = profesor != null ? profesor.Nombre + " " + profesor.Apellidos : "";
                 item.nombreTipoFalta = tipoFalta != null ? tipoFalta.Tipo : "";
+                item.Color = tipoFalta.Color;
                 listaFaltas.Add(item);
             }
 
