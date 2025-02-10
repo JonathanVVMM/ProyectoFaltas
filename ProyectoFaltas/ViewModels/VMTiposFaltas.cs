@@ -170,7 +170,7 @@ namespace ProyectoFaltas.ViewModels
         //---------------------------------------------------------- ActualizarTipoFalta ----------------------------------------------------------
         public async void ActualizarTipoFalta()
         {
-            if (await App.Current.MainPage.DisplayAlert("Actualizar Tipo falta", "Está seguro de actualizar el tipo de falta seleccionado?", "Confirmar", "Cancelar"))
+            if (await App.Current.MainPage.DisplayAlert("Actualizar Tipo falta", "¿Está seguro de actualizar el tipo de falta seleccionado?", "Confirmar", "Cancelar"))
             {
                 if (!String.IsNullOrEmpty(TipoNuevo))
                 {
@@ -193,7 +193,7 @@ namespace ProyectoFaltas.ViewModels
         //---------------------------------------------------------- CancelarActualizarTipoFalta ----------------------------------------------------------
         public async void CancelarActualizarTipoFalta()
         {
-            if (await App.Current.MainPage.DisplayAlert("Cancelación de Actualización", "Está seguro de cancelar la actualización del tipo de falta?", "Confirmar", "Cancelar"))
+            if (await App.Current.MainPage.DisplayAlert("Cancelación de Actualización", "¿Está seguro de cancelar la actualización del tipo de falta?", "Confirmar", "Cancelar"))
             {
                 TipoFaltaEditando = null;
                 Editando = false;

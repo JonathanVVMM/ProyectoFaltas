@@ -31,5 +31,8 @@ namespace ProyectoFaltas.Models
 
         [Indexed]
         public int IdCursos { get; set; }
+
+        [NotMapped]
+        public string Color { get; set; }
     }
 }

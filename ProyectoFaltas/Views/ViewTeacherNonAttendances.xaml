@@ -4,11 +4,11 @@
              x:Class="ProyectoFaltas.Views.ViewTeacherNonAttendances"
              BackgroundColor="{StaticResource Gray200}">
 
-    <Grid ColumnDefinitions="*,1.5*" RowDefinitions="*,*,auto" Padding="20" ColumnSpacing="20">
+    <Grid ColumnDefinitions="*,1.5*" RowDefinitions="*,*,auto" Padding="20" ColumnSpacing="20" RowSpacing="20">
 
         <!-- .............................MOSTRAR EL PROFESOR............................. -->
         <Frame Grid.Column="0" Grid.Row="0" VerticalOptions="Start" >
-            <Grid RowDefinitions="auto,*" RowSpacing="30">
+            <Grid RowDefinitions="auto,auto" RowSpacing="30">
                 <Grid Grid.Row="0">
                     <Label Text="Profesor del que son las faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
 
@@ -20,7 +20,7 @@
                 </Grid>
 
                 <VerticalStackLayout Grid.Row="1" IsEnabled="False">
-                    <Grid RowDefinitions="*,*,*" RowSpacing="10">
+                    <Grid RowDefinitions="auto,auto,auto" RowSpacing="10">
 
                         <VerticalStackLayout Grid.Row="0">
                             <Label Text="Nombre"/>
@@ -43,8 +43,8 @@
         </Frame>
 
         <!-- .............................EDITAR FALTA DEL PROFESOR............................. -->
-        <Frame Grid.Column="0"  Grid.Row="1" VerticalOptions="Start" >
-            <Grid RowDefinitions="auto,*" RowSpacing="30">
+        <Frame Grid.Column="0"  Grid.Row="1" VerticalOptions="Start" Grid.RowSpan="2">
+            <Grid RowDefinitions="auto,*" RowSpacing="20">
                 <Grid Grid.Row="0">
                     <Label Text="Editar la falta del profesor" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
 
@@ -73,10 +73,10 @@
                             <Picker Grid.Row="3" ItemsSource="{Binding ListaTipoFaltas}" SelectedItem="{Binding TipoFaltaNuevo, Mode=TwoWay}" ItemDisplayBinding="{Binding Tipo}" HorizontalOptions="FillAndExpand"/>
                         </VerticalStackLayout>
 
-                        <HorizontalStackLayout Grid.Row="3" IsEnabled="{Binding ModificandoFalta}">
-                            <Button Text="Actualizar" Clicked="GuardarModificarFalta"/>
-                            <Button Text="Cancelar" Clicked="CancerlarModificarFalta"/>
-                        </HorizontalStackLayout>
+                        <Grid Grid.Row="3" IsEnabled="{Binding ModificandoFalta}">
+                            <Button Text="Actualizar" Clicked="GuardarModificarFalta" HorizontalOptions="Start"/>
+                            <Button Text="Cancelar" Clicked="CancerlarModificarFalta" HorizontalOptions="End"/>
+                        </Grid>
 
 
                     </Grid>
@@ -84,14 +84,14 @@
             </Grid>
         </Frame>
 
-        <Grid Grid.Row="3" Grid.Column="0" ColumnDefinitions="*,*">
+        <Grid Grid.Row="3" Grid.Column="1" ColumnDefinitions="*,*">
             <Button Grid.Column="0" Text="Volver a Calendario" VerticalOptions="End" HorizontalOptions="Start" x:Name="Volver_Calendario" Clicked="Volver_Calendario_Clicked"/>
             <Button Grid.Column="1" Text="Volver a Editar Profesores" VerticalOptions="End" HorizontalOptions="End" x:Name="Editar_Profe" Clicked="Editar_Profe_Clicked"/>
         </Grid>
 
 
         <!-- .............................MOSTRAR LAS FALTAS............................. -->
-        <Frame Grid.Column="1" Grid.RowSpan="3">
+        <Frame Grid.Column="1" Grid.RowSpan="2">
             <Grid RowDefinitions="auto,auto,*" RowSpacing="20">
                 <Grid Grid.Row="0">
                     <Label Text="Faltas de ese profesor" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>

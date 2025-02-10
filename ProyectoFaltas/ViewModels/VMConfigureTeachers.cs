@@ -256,7 +256,7 @@ namespace ProyectoFaltas.ViewModels
         //funcion del imagebutton que es para activar la modificacion
         public async void ModifyProfesor(int ItemId)
         {
-            if (await App.Current.MainPage.DisplayAlert("Actualizar Profesor", "Está seguro de actualizar el profesor seleccionado?", "Confirmar", "Cancelar"))
+            if (await App.Current.MainPage.DisplayAlert("Actualizar Profesor", "¿Está seguro de actualizar el profesor seleccionado?", "Confirmar", "Cancelar"))
             {
                 ProfesorEditando = ListaProfesores.FirstOrDefault(p => p.Id == ItemId);
                 Editando = true;
@@ -266,7 +266,7 @@ namespace ProyectoFaltas.ViewModels
         //funcion del boton para actualizar los datos
         public async void ActualizarProfesor()
         {
-            if (await App.Current.MainPage.DisplayAlert("Actualizar Profesor", "Está seguro de actualizar el profesor seleccionado?", "Confirmar", "Cancelar"))
+            if (await App.Current.MainPage.DisplayAlert("Actualizar Profesor", "¿Está seguro de actualizar el profesor seleccionado?", "Confirmar", "Cancelar"))
             {
                 var cambiarActivo = false;
                 if (!String.IsNullOrEmpty(NombreNuevo)) ProfesorEditando.Nombre = NombreNuevo;
@@ -304,7 +304,7 @@ namespace ProyectoFaltas.ViewModels
 
         public async void CancelarActualizarProfesor()
         {
-            if (await App.Current.MainPage.DisplayAlert("Cancelación de Actualización", "Está seguro de cancelar la actualización del profesor?", "Confirmar", "Cancelar"))
+            if (await App.Current.MainPage.DisplayAlert("Cancelación de Actualización", "¿Está seguro de cancelar la actualización del profesor?", "Confirmar", "Cancelar"))
             {
                 ProfesorEditando = null;
                 Editando = false;

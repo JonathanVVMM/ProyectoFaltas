@@ -177,6 +177,7 @@ namespace ProyectoFaltas.Database
             nuevaFalta.UltimaModificacion = faltaProvisional.UltimaModificacion;
             nuevaFalta.IdCursos = faltaProvisional.IdCursos;
             nuevaFalta.nombreTipoFalta = tipoFaltaProvisional.Tipo;
+            nuevaFalta.Color = tipoFaltaProvisional.Color;
 
             return nuevaFalta;
         }
@@ -240,7 +241,9 @@ namespace ProyectoFaltas.Database
                     Fecha = falta.Fecha,
                     UltimaModificacion = falta.UltimaModificacion,
                     profesorNombreApellido = profesor != null ? profesor.Nombre + " " + profesor.Apellidos : "",
-                    nombreTipoFalta = tipoFalta != null ? tipoFalta.Tipo : ""
+                    nombreTipoFalta = tipoFalta != null ? tipoFalta.Tipo : "",
+                    Color = tipoFalta.Color,
+
                 });
             }
 

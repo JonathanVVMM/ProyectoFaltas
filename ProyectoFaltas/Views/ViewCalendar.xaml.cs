@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using ProyectoFaltas.Database;
+using ProyectoFaltas.Metodos;
 
 namespace ProyectoFaltas.Views
 {
@@ -17,7 +18,6 @@ namespace ProyectoFaltas.Views
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
 
         private DatabaseService database = new DatabaseService();
 
@@ -88,9 +88,10 @@ namespace ProyectoFaltas.Views
             }
         }
 
-        public string stringSelectedDay => SelectedDay.ToString("d");
+        public HexColorConverter HexColorConverter { get; set; } = new HexColorConverter();
 
-        public ObservableCollection<ColorOption> ColorOptions { get; set; } = ColorOption.ColorOptions;
+
+        public string stringSelectedDay => SelectedDay.ToString("d");
 
 
         public ViewCalendar()
