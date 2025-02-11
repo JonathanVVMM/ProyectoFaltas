@@ -27,7 +27,7 @@
                     </ScrollView>
                 </Grid>
 
-                <Button Text="Volver a la pagina de inicio" Grid.Row="1" x:Name="Volver_HomePage" Clicked="Volver_HomePage_Clicked" BackgroundColor="#2F593A" VerticalOptions="End" HorizontalOptions="CenterAndExpand"></Button>
+                <Button Text="Volver a la página de inicio" Grid.Row="1" x:Name="Volver_HomePage" Clicked="Volver_HomePage_Clicked" BackgroundColor="#2F593A" VerticalOptions="End" HorizontalOptions="CenterAndExpand"></Button>
             </Grid>
         </Frame>
 

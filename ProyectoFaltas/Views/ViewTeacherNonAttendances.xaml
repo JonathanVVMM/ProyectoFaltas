@@ -94,8 +94,8 @@
         </Frame>
 
         <Grid Grid.Row="3" Grid.Column="1" ColumnDefinitions="*,*">
-            <Button Grid.Column="0" Text="Volver a Calendario" VerticalOptions="End" HorizontalOptions="Start" x:Name="Volver_Calendario" Clicked="Volver_Calendario_Clicked"/>
-            <Button Grid.Column="1" Text="Volver a Editar Profesores" VerticalOptions="End" HorizontalOptions="End" x:Name="Editar_Profe" Clicked="Editar_Profe_Clicked"/>
+            <Button Grid.Column="0" Text="Volver al calendario" VerticalOptions="End" HorizontalOptions="Start" x:Name="Volver_Calendario" Clicked="Volver_Calendario_Clicked"/>
+            <Button Grid.Column="1" Text="Volver a editar Profesores" VerticalOptions="End" HorizontalOptions="End" x:Name="Editar_Profe" Clicked="Editar_Profe_Clicked"/>
         </Grid>
 
 
