@@ -42,7 +42,7 @@
                                  HeightRequest="10"
                                  WidthRequest="10"
                                  BackgroundColor="Transparent" IsEnabled="True"
-                                 Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                                 Clicked="IconoAyudaFaltasDia"/>
 
                 </Grid>
 
@@ -103,7 +103,7 @@
                                      HeightRequest="10"
                                      WidthRequest="10"
                                      BackgroundColor="Transparent" IsEnabled="True"
-                                     Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                                     Clicked="IconoAyudaAdjuntarFaltas"/>
 
                     </Grid>
 

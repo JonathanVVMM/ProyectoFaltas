@@ -1,6 +1,7 @@
 using ProyectoFaltas.Database;
 using ProyectoFaltas.Models;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace ProyectoFaltas.Views;
 
@@ -49,21 +50,41 @@ public partial class viewCreateYear : ContentPage
         }
     }
 
+    public bool ValidarNombreCurso(string curso)
+    {
+
+        if (Regex.Match(curso, "2[0-9]{3}/2[0-9]{3}").Success)
+        {
+            string[] partes = curso.Split("/");
+            return int.Parse(partes[0]) == int.Parse(partes[1]) - 1;
+        }
+        else return false;
+    }
+
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        if (await _databaseService.ExisteCurso(Nombre))
+        if (ValidarNombreCurso(Nombre))
         {
-            await DisplayAlert("EXISTE CURSO", "Este curso ya existe, no se puede crear", "Entendido");
+            if (await _databaseService.ExisteCurso(Nombre))
+            {
+                await DisplayAlert("EXISTE CURSO", "Este curso ya existe, no se puede crear", "Entendido");
+            }
+            else
+            {
+                if (await App.Current.MainPage.DisplayAlert("Crear Curso", $"¿ Está seguro de crear el curso {Nombre} ?", "Confirmar", "Cancelar"))
+                {
+                    var nuevoCurso = new Curso { NombreCurso = Nombre };
+                    await _databaseService.AddCursoAsync(nuevoCurso);
+                    await SeleccionarCursoAsync(nuevoCurso.Id);
+                    Nombre = "";
+                }
+            }
         }
         else
         {
-            if (await App.Current.MainPage.DisplayAlert("Crear Curso", $"¿ Está seguro de crear el curso {Nombre} ?", "Confirmar", "Cancelar"))
-            {
-                var nuevoCurso = new Curso { NombreCurso = Nombre };
-                await _databaseService.AddCursoAsync(nuevoCurso);
-                await SeleccionarCursoAsync(nuevoCurso.Id);
-            }
+            await DisplayAlert("FORMATO NO VALIDO", "El nombre del curso debe ser 2 años consecutivos separados por \"/\" , ejemplo:\n\n 2024/2025    2027/2028", "Entendido");
         }
+
 
 
     }

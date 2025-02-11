@@ -169,5 +169,21 @@ public partial class ViewTeacherNonAttendances : ContentPage, INotifyPropertyCha
         recargarDatos();
     }
 
+    //BOTONES DE AYUDA
+
+    public async void IconoAyudaProfesor(object sender, EventArgs e)
+    {
+        await DisplayAlert("Mensaje de ayuda", "Aqui se muestran los datos del profesor del que se muestran las faltas", "Entendido");
+    }
+
+    public async void IconoAyudaFaltasProfesor(object sender, EventArgs e)
+    {
+        await DisplayAlert("Mensaje de ayuda", "Aqui se muestran las faltas las faltas del profesor.\n\nEn el campo que puedes rellenar puedes elegir un mes de forma numérica, es decir, de 1 a 12.\nPor ejemplo, si pones 2 buscará las faltas de febrero", "Entendido");
+    }
+
+    public async void IconoAyudaEditarFalta(object sender, EventArgs e)
+    {
+        await DisplayAlert("Mensaje de ayuda", "Los 2 primeros campos (fecha y tipo de falta) se rellenan solos cuando modificas una falta, y el ultimo es un desplegable para elegir el tipo de falta nuevo.", "Entendido");
+    }
 
 }

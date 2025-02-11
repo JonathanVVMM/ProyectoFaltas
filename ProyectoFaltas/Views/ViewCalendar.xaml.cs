@@ -76,7 +76,7 @@ namespace ProyectoFaltas.Views
             }
         }
 
-        private DateTime _selectedDay;
+        private DateTime _selectedDay = DateTime.Now;
         public DateTime SelectedDay
         {
             get => _selectedDay;
@@ -150,6 +150,20 @@ namespace ProyectoFaltas.Views
                 await Shell.Current.GoToAsync($"//ViewTeacherNonAttendances?IdProfesor={ItemId}");
             }
         }
+
+        //METODOS PARA LOS BOTONES
+
+        public async void IconoAyudaFaltasDia(object sender, EventArgs e)
+        {
+            await DisplayAlert("Mensaje de ayuda", "Aqui se muestran las faltas de los profesores de ese día, es decir, hasta que no insertes una falta no mostrará nada", "Entendido");
+        }
+
+        public async void IconoAyudaAdjuntarFaltas(object sender, EventArgs e)
+        {
+            await DisplayAlert("Mensaje de ayuda", "Este menu sirve para agregar faltas al día elegido en el calendario, consta de: \n\n - Un desplegable para elegir el profesor (debes tenerlo creado) \n - Un desplegable para elegir el tipo de falta (debes tenerla creada)", "Entendido");
+        }
+
+
     }
 
 }

@@ -25,7 +25,7 @@
                                  HeightRequest="10"
                                  WidthRequest="10"
                                  BackgroundColor="Transparent" IsEnabled="True"
-                                 Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                                 Clicked="IconoAyudaProfesor"/>
                 </Grid>
 
                 <VerticalStackLayout Grid.Row="1" IsEnabled="False">
@@ -61,7 +61,7 @@
                                  HeightRequest="10"
                                  WidthRequest="10"
                                  BackgroundColor="Transparent" IsEnabled="True"
-                                 Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                                 Clicked="IconoAyudaEditarFalta"/>
                 </Grid>
 
                 <VerticalStackLayout Grid.Row="1" >
@@ -109,7 +109,7 @@
                                  HeightRequest="10"
                                  WidthRequest="10"
                                  BackgroundColor="Transparent" IsEnabled="True"
-                                 Command="{Binding IconoAyudaEditarDatosCommand}"/>
+                                 Clicked="IconoAyudaFaltasProfesor"/>
                 </Grid>
 
                 <Grid ColumnDefinitions="auto,*" Grid.Row="1" ColumnSpacing="10">

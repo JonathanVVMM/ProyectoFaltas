@@ -57,6 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="ViewModels\VMTeachersNonAttendances.cs" />
 	  <Compile Remove="Views\ViewCreateTeachers.xaml.cs" />
 	</ItemGroup>
 
