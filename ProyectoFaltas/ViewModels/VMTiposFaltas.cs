@@ -170,7 +170,7 @@ namespace ProyectoFaltas.ViewModels
         //---------------------------------------------------------- ActualizarTipoFalta ----------------------------------------------------------
         public async void ActualizarTipoFalta()
         {
-            if (await App.Current.MainPage.DisplayAlert("Actualizar Tipo falta", "¿Está seguro de actualizar el tipo de falta seleccionado?", "Confirmar", "Cancelar"))
+            if (await App.Current.MainPage.DisplayAlert("Actualizar tipo falta", "¿Está seguro de actualizar el tipo de falta seleccionado?", "Confirmar", "Cancelar"))
             {
                 if (!String.IsNullOrEmpty(TipoNuevo))
                 {
@@ -193,7 +193,7 @@ namespace ProyectoFaltas.ViewModels
         //---------------------------------------------------------- CancelarActualizarTipoFalta ----------------------------------------------------------
         public async void CancelarActualizarTipoFalta()
         {
-            if (await App.Current.MainPage.DisplayAlert("Cancelación de Actualización", "¿Está seguro de cancelar la actualización del tipo de falta?", "Confirmar", "Cancelar"))
+            if (await App.Current.MainPage.DisplayAlert("Cancelación de actualización", "¿Está seguro de cancelar la actualización del tipo de falta?", "Confirmar", "Cancelar"))
             {
                 TipoFaltaEditando = null;
                 Editando = false;
@@ -215,12 +215,12 @@ namespace ProyectoFaltas.ViewModels
 
         public async void IconTipoFalta()
         {
-            await App.Current.MainPage.DisplayAlert("Información de ayuda", "Este apartado te muestra los tipos de faltas que hay y te permite modificarlas.\nCuando le das al botón de editar te activo el modo edición y te sale un menu abajo a la derecha", "Salir");
+            await App.Current.MainPage.DisplayAlert("Información de ayuda", "Este apartado te muestra los tipos de faltas que hay y te permite modificarlas.\nCuando le das al botón de editar te activo el modo edición y te sale un menú abajo a la derecha", "Salir");
         }
 
         public async void IconCrearTipoFalta()
         {
-            await App.Current.MainPage.DisplayAlert("Información de ayuda", "Tiene 2 campo, un campo que escribes a mano el tipo de falta y una lista que te deja elegir de que color quieres que sea la falta", "Salir");
+            await App.Current.MainPage.DisplayAlert("Información de ayuda", "Tiene 2 campos, un campo que escribes a mano el tipo de falta y una lista que te deja elegir de que color quieres que sea la falta", "Salir");
         }
 
         public async void IconActualizarTipoFalta()

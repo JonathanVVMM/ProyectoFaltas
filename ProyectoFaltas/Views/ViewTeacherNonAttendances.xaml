@@ -19,7 +19,7 @@
         <Frame Grid.Column="0" Grid.Row="0" VerticalOptions="Start" >
             <Grid RowDefinitions="auto,auto" RowSpacing="30">
                 <Grid Grid.Row="0">
-                    <Label Text="Profesor del que son las faltas" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+                    <Label Text="Faltas del profesor" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
 
                     <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
                                  HeightRequest="10"
@@ -55,7 +55,7 @@
         <Frame Grid.Column="0"  Grid.Row="1" VerticalOptions="Start" Grid.RowSpan="2">
             <Grid RowDefinitions="auto,*" RowSpacing="20">
                 <Grid Grid.Row="0">
-                    <Label Text="Editar la falta del profesor" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+                    <Label Text="Editar falta" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
 
                     <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
                                  HeightRequest="10"
@@ -103,7 +103,7 @@
         <Frame Grid.Column="1" Grid.RowSpan="2">
             <Grid RowDefinitions="auto,auto,*" RowSpacing="20">
                 <Grid Grid.Row="0">
-                    <Label Text="Faltas de ese profesor" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
+                    <Label Text="Datos de la falta" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
 
                     <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
                                  HeightRequest="10"

@@ -71,7 +71,7 @@ public partial class viewCreateYear : ContentPage
             }
             else
             {
-                if (await App.Current.MainPage.DisplayAlert("Crear Curso", $"¿ Está seguro de crear el curso {Nombre} ?", "Confirmar", "Cancelar"))
+                if (await App.Current.MainPage.DisplayAlert("Crear curso", $"¿Está seguro de crear el curso {Nombre}?", "Confirmar", "Cancelar"))
                 {
                     var nuevoCurso = new Curso { NombreCurso = Nombre };
                     await _databaseService.AddCursoAsync(nuevoCurso);

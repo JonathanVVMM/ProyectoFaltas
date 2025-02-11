@@ -145,7 +145,7 @@ namespace ProyectoFaltas.Views
 
         public async void FaltasProfesor(int ItemId)
         {
-            if (await App.Current.MainPage.DisplayAlert("Faltas del Profesor", "Si acepta será cambiado de página a la lista de faltas de este profesor", "Confirmar", "Cancelar"))
+            if (await App.Current.MainPage.DisplayAlert("Faltas del profesor", "Si acepta será cambiado de página a la lista de faltas de este profesor", "Confirmar", "Cancelar"))
             {
                 await Shell.Current.GoToAsync($"//ViewTeacherNonAttendances?IdProfesor={ItemId}");
             }
@@ -155,15 +155,20 @@ namespace ProyectoFaltas.Views
 
         public async void IconoAyudaFaltasDia(object sender, EventArgs e)
         {
-            await DisplayAlert("Mensaje de ayuda", "Aqui se muestran las faltas de los profesores de ese día, es decir, hasta que no insertes una falta no mostrará nada", "Entendido");
+            await DisplayAlert("Mensaje de ayuda", "Aquí se muestran las faltas de los profesores de ese día, es decir, hasta que no insertes una falta no mostrará nada", "Entendido");
         }
 
         public async void IconoAyudaAdjuntarFaltas(object sender, EventArgs e)
         {
-            await DisplayAlert("Mensaje de ayuda", "Este menu sirve para agregar faltas al día elegido en el calendario, consta de: \n\n - Un desplegable para elegir el profesor (debes tenerlo creado) \n - Un desplegable para elegir el tipo de falta (debes tenerla creada)", "Entendido");
+            await DisplayAlert("Mensaje de ayuda", "Este menú sirve para agregar faltas al día elegido en el calendario, consta de: \n\n - Un desplegable para elegir el profesor (debes tenerlo creado) \n - Un desplegable para elegir el tipo de falta (debes tenerla creada)", "Entendido");
         }
 
 
+        //---------------------------------------------------------- GoHomePage_Clicked ----------------------------------------------------------
+        private async void GoHomePage_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//HomePage");
+        }
     }
 
 }
