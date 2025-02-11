@@ -11,7 +11,7 @@
 
             <Grid RowDefinitions="auto,*">
                 <Grid>
-                    <Label Text="Lista de profesor" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Text="Lista de profesores" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium"/>
                     <ImageButton Source="ayuda.png" HorizontalOptions="End" Aspect="AspectFit"
                                  HeightRequest="10"
                                  WidthRequest="10"
