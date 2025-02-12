@@ -26,6 +26,9 @@ namespace ProyectoFaltas.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        
+        [Ignore]
+        public string NombreCompleto => $"{Nombre} {Apellidos}";
+
+
     }
 }

@@ -111,7 +111,7 @@
                     <Grid Grid.Row="1" RowDefinitions="auto,auto,auto,auto" RowSpacing="10">
 
                         <Label Grid.Row="0" Text="Selecciona un profesor:" FontSize="Medium" />
-                        <Picker Grid.Row="1" x:Name="ProfesorPicker" ItemsSource="{Binding ListaProfesores}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ProfesorSeleccionado}" />
+                        <Picker Grid.Row="1" x:Name="ProfesorPicker" ItemsSource="{Binding ListaProfesores}" ItemDisplayBinding="{Binding NombreCompleto}" SelectedItem="{Binding ProfesorSeleccionado}" />
 
                         <Label Grid.Row="2" Text="Selecciona tipo de falta:" FontSize="Medium" />
                         <Picker Grid.Row="3" x:Name="TipoFaltaPicker" ItemsSource="{Binding ListaTipoFaltas}" ItemDisplayBinding="{Binding Tipo}" SelectedItem="{Binding TipoFaltaSeleccionado}"/>

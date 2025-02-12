@@ -103,7 +103,7 @@ namespace ProyectoFaltas.Views
         {
             base.OnAppearing();
             ListaTipoFaltas = new ObservableCollection<TipoFalta>(await database.GetTipoFaltasAsync());
-            ListaProfesores = new ObservableCollection<Profesor>(await database.GetProfesoresAsync());
+            ListaProfesores = new ObservableCollection<Profesor>(await database.GetProfesoresActivosPorCursoAsync());
             recargarLista();
         }
 

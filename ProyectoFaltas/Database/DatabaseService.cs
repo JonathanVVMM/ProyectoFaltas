@@ -91,10 +91,10 @@ namespace ProyectoFaltas.Database
         }
 
         // Obtener los profesores activos de un curso en especifico
-        public async Task<List<Profesor>> GetProfesoresActivosPorCursoAsync(int idCurso)
+        public async Task<List<Profesor>> GetProfesoresActivosPorCursoAsync()
         {
             await Init();
-            var activos = await Database.Table<Activo>().Where(a => a.IdCursos == idCurso).ToListAsync();
+            var activos = await Database.Table<Activo>().Where(a => a.IdCursos == Curso.CursoActual.Id).ToListAsync();
             var profesoresIds = activos.Select(a => a.IdProfesores).ToList();
 
             return await Database.Table<Profesor>().Where(p => profesoresIds.Contains(p.Id)).ToListAsync();

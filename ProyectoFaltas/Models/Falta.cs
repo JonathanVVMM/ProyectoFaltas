@@ -18,13 +18,13 @@ namespace ProyectoFaltas.Models
         [Indexed]
         public int IdProfesores { get; set; }
 
-        [NotMapped]
+        [Ignore]
         public string profesorNombreApellido { get; set; }
 
         [Indexed]
         public int IdTipoFalta { get; set; }
 
-        [NotMapped]
+        [Ignore]
         public string nombreTipoFalta { get; set; }
 
         public DateTime UltimaModificacion { get; set; }
@@ -32,7 +32,7 @@ namespace ProyectoFaltas.Models
         [Indexed]
         public int IdCursos { get; set; }
 
-        [NotMapped]
+        [Ignore]
         public string Color { get; set; }
     }
 }

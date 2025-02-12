@@ -203,7 +203,7 @@ namespace ProyectoFaltas.ViewModels
         public async void recargarEstadoProfesores()
         {
             ListaProfesores = new ObservableCollection<Profesor>(await database.GetProfesoresAsync());
-            ObservableCollection<Profesor> ListaActivos = new ObservableCollection<Profesor>(await database.GetProfesoresActivosPorCursoAsync(Curso.CursoActual.Id));
+            ObservableCollection<Profesor> ListaActivos = new ObservableCollection<Profesor>(await database.GetProfesoresActivosPorCursoAsync());
             foreach (var item in ListaProfesores)
             {
                 int cont = 0;
