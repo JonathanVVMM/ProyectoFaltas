@@ -71,7 +71,7 @@
                                             </HorizontalStackLayout>
 
                                             <HorizontalStackLayout Spacing="10" Grid.Row="2">
-                                                <Label Text="Última modificaión:"/>
+                                                <Label Text="Última modificación:"/>
                                                 <Label Text="{Binding UltimaModificacion}"/>
                                             </HorizontalStackLayout>
 
