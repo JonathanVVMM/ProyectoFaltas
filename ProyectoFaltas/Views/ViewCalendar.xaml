@@ -16,7 +16,9 @@
 
     <Grid ColumnDefinitions="1.3*,2*,*" RowDefinitions="2*,*" Padding="20" ColumnSpacing="20">
         <Frame Grid.Column="0" VerticalOptions="Start">
-            <controls:Calendar BackgroundColor="{StaticResource Gray100}"
+            <controls:Calendar Culture="{Binding Culture}"
+                               FirstDayOfWeek="Monday"
+                               BackgroundColor="{StaticResource Gray100}"
                                SelectedDate="{Binding SelectedDay,Mode=TwoWay}" DaysTitleColor="Black"
                                YearLabelColor="#2F593A" MonthLabelColor="#2F593A"
                                SelectedDayBackgroundColor="#2F593A" SelectedDateColor="#2F593A"

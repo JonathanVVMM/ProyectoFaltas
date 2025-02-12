@@ -7,11 +7,13 @@ using System.Linq;
 using System.Windows.Input;
 using ProyectoFaltas.Database;
 using ProyectoFaltas.Metodos;
+using System.Globalization;
 
 namespace ProyectoFaltas.Views
 {
     public partial class ViewCalendar : ContentPage, INotifyPropertyChanged
     {
+        public CultureInfo Culture => new CultureInfo("es-ES");
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName = null)
