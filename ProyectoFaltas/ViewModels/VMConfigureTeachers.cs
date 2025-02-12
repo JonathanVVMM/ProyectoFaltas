@@ -34,6 +34,8 @@ namespace ProyectoFaltas.ViewModels
         }
 
 
+
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -198,7 +200,7 @@ namespace ProyectoFaltas.ViewModels
         public ICommand ActualizarProfesorCommand { get; set; }
         public ICommand CancelarActualizarProfesorCommand { get; set; }
 
-        private async void recargarEstadoProfesores()
+        public async void recargarEstadoProfesores()
         {
             ListaProfesores = new ObservableCollection<Profesor>(await database.GetProfesoresAsync());
             ObservableCollection<Profesor> ListaActivos = new ObservableCollection<Profesor>(await database.GetProfesoresActivosPorCursoAsync(Curso.CursoActual.Id));

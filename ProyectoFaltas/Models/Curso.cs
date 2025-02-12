@@ -20,6 +20,7 @@ namespace ProyectoFaltas.Models
             set
             {
                 _cursoActual = value;
+
             }
         }
 

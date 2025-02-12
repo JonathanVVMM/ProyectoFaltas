@@ -145,6 +145,7 @@ namespace ProyectoFaltas.Views
 
         public async void FaltasProfesor(int ItemId)
         {
+
             if (await App.Current.MainPage.DisplayAlert("Faltas del profesor", "Si acepta será cambiado de página a la lista de faltas de este profesor", "Confirmar", "Cancelar"))
             {
                 await Shell.Current.GoToAsync($"//ViewTeacherNonAttendances?IdProfesor={ItemId}");

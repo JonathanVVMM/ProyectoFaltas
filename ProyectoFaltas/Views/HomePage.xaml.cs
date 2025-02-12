@@ -22,6 +22,7 @@ public partial class HomePage : ContentPage, INotifyPropertyChanged
         cargarCursos();
     }
 
+
     public bool CursoSeleccionado => CursoBindeado != null;
     public Curso CursoBindeado
     {
