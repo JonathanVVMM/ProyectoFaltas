@@ -16,7 +16,7 @@
                                      HeightRequest="10"
                                      WidthRequest="10"
                                      BackgroundColor="Transparent" IsEnabled="True"
-                                     Command="{Binding IconoHome}"/>
+                                     Clicked="IconoHome"/>
                     </Grid>
 
                     <ScrollView Grid.Row="1">

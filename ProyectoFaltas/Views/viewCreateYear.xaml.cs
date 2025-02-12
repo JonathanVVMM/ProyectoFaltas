@@ -89,9 +89,9 @@ public partial class viewCreateYear : ContentPage
 
     }
 
-    public void IconoHome()
+    public async void IconoHome(object sender, EventArgs e)
     {
-        DisplayAlert("Información", "Esta página es para crear un curso:\n - Si el curso existe no te deja crearlo\n - Si ya existe un curso con ese nombre tampoco", "Entendido");
+        await DisplayAlert("Información", "Esta página es para crear un curso:\n - Si el curso existe no te deja crearlo\n - Si ya existe un curso con ese nombre tampoco", "Entendido");
     }
 
     private async void Volver_HomePage_Clicked(object sender, EventArgs e)
